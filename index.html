@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Lexend%3Awght%40400%3B500%3B700%3B900&amp;family=Roboto%3Awght%40400%3B500%3B700&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900" onload="this.rel='stylesheet'" rel="stylesheet"/>
+<title>EasyStock Pro Login</title>
+<link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style type="text/tailwindcss">
+      :root {
+        --checkbox-tick-svg: url('data:image/svg+xml,%3csvg viewBox=%270 0 16 16%27 fill=%27white%27 xmlns=%27http://www.w3.org/2000/svg%27%3e%3cpath d=%27M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z%27/%3e%3c/svg%3e');
+        --primary-color: #197fe5;
+        --text-primary: #1f2937;--text-secondary: #6b7280;--bg-primary: #f8fafc;--bg-secondary: #ffffff;--border-color: #e5e7eb;--input-bg: #f3f4f6;--input-border: #d1d5db;--input-placeholder: #9ca3af;}
+      html[dir="rtl"] .group\/design-root {
+        font-family: "Noto Sans Arabic", "Roboto", "Lexend", sans-serif;
+      }
+    </style>
+</head>
+<body class="bg-[var(--bg-primary)]">
+<div class="relative flex size-full min-h-screen flex-col group/design-root overflow-x-hidden" style="font-family: 'Roboto', 'Lexend', 'Noto Sans', sans-serif;">
+<div class="flex flex-1 flex-col items-center justify-center p-4 md:p-6">
+<div class="w-full max-w-md rounded-xl bg-[var(--bg-secondary)] shadow-2xl">
+<header class="flex flex-col items-center gap-3 border-b border-[var(--border-color)] p-6 md:p-8">
+<div class="flex items-center gap-3 text-[var(--primary-color)]">
+<svg class="h-8 w-8" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z" fill="currentColor"></path></svg>
+<h1 class="text-2xl font-bold text-[var(--text-primary)]">EasyStock Pro</h1>
+</div>
+<p class="text-center text-sm text-[var(--text-secondary)]">Warehouse Management System</p>
+</header>
+<main class="p-6 md:p-8">
+<h2 class="mb-6 text-center text-xl font-semibold text-[var(--text-primary)] md:text-2xl">Welcome Back</h2>
+<form class="space-y-6" id="loginForm">
+<div>
+<label class="mb-1.5 block text-sm font-medium text-[var(--text-primary)]" for="username">Username</label>
+<input class="form-input w-full rounded-lg border-[var(--input-border)] bg-[var(--input-bg)] p-3 text-sm text-[var(--text-primary)] placeholder-[var(--input-placeholder)] focus:border-[var(--primary-color)] focus:ring-1 focus:ring-[var(--primary-color)]" id="username" placeholder="Enter your username" type="text" required/>
+</div>
+<div>
+<label class="mb-1.5 block text-sm font-medium text-[var(--text-primary)]" for="password">Password</label>
+<input class="form-input w-full rounded-lg border-[var(--input-border)] bg-[var(--input-bg)] p-3 text-sm text-[var(--text-primary)] placeholder-[var(--input-placeholder)] focus:border-[var(--primary-color)] focus:ring-1 focus:ring-[var(--primary-color)]" id="password" placeholder="Enter your password" type="password" required/>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center">
+<input class="form-checkbox h-4 w-4 rounded border-[var(--input-border)] bg-[var(--input-bg)] text-[var(--primary-color)] checked:bg-[var(--primary-color)] checked:border-transparent checked:bg-[image:--checkbox-tick-svg] focus:ring-1 focus:ring-[var(--primary-color)] focus:ring-offset-0" id="remember-me" type="checkbox"/>
+<label class="ml-2 block text-sm text-[var(--text-secondary)]" for="remember-me">Remember me</label>
+</div>
+<a class="text-sm font-medium text-[var(--primary-color)] hover:underline" href="#">Forgot password?</a>
+</div>
+<button class="w-full rounded-lg bg-[var(--primary-color)] py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] focus:ring-offset-2" type="submit">
+                Sign In
+              </button>
+</form>
+<div class="mt-6 space-y-2 text-center text-sm text-[var(--text-secondary)]">
+<p>
+                Don't have an account?
+                <a class="font-medium text-[var(--primary-color)] hover:underline" href="#">Sign up</a>
+</p>
+<button class="font-medium text-[var(--primary-color)] hover:underline focus:outline-none" onclick="document.documentElement.dir = document.documentElement.dir === 'rtl' ? 'ltr' : 'rtl'">
+                Switch to <span class="group-dir-ltr:inline group-dir-rtl:hidden">Arabic (RTL)</span><span class="group-dir-rtl:inline group-dir-ltr:hidden">English (LTR)</span>
+</button>
+</div>
+</main>
+</div>
+</div>
+</div>
+<script>
+      // Simple RTL toggle for demonstration.
+      // In a real app, this would likely be handled by a framework or persisted setting.
+      const htmlEl = document.documentElement;
+      const langToggleButton = document.querySelector('button[onclick*="document.documentElement.dir"]');
+      if(langToggleButton) {
+        langToggleButton.addEventListener('click', () => {
+          setTimeout(() => { // Allow time for dir attribute to change
+            const isRtl = htmlEl.dir === 'rtl';
+            const langSpanLtr = langToggleButton.querySelector('.group-dir-ltr\\:inline');
+            const langSpanRtl = langToggleButton.querySelector('.group-dir-rtl\\:inline');
+            if(langSpanLtr && langSpanRtl) {
+                 if (isRtl) {
+                    langSpanLtr.classList.add('hidden');
+                    langSpanLtr.classList.remove('inline');
+                    langSpanRtl.classList.add('inline');
+                    langSpanRtl.classList.remove('hidden');
+                } else {
+                    langSpanLtr.classList.add('inline');
+                    langSpanLtr.classList.remove('hidden');
+                    langSpanRtl.classList.add('hidden');
+                    langSpanRtl.classList.remove('inline');
+                }
+            }
+          }, 0);
+        });
+      }
+
+      // تحميل نظام إدارة البيانات
+      const script = document.createElement('script');
+      script.src = 'js/data-manager.js';
+      document.head.appendChild(script);
+
+      // انتظار تحميل نظام إدارة البيانات
+      script.onload = function() {
+        // التحقق من وجود جلسة نشطة
+        const currentUser = dataManager.getCurrentUser();
+        if (currentUser) {
+          // إعادة توجيه إلى لوحة التحكم إذا كان المستخدم مسجل دخول بالفعل
+          window.location.href = 'dashboard.html';
+          return;
+        }
+
+        // معالجة نموذج تسجيل الدخول
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+          e.preventDefault();
+
+          const username = document.getElementById('username').value.trim();
+          const password = document.getElementById('password').value.trim();
+          const rememberMe = document.getElementById('remember-me').checked;
+
+          // التحقق من صحة البيانات
+          if (!username || !password) {
+            showMessage('يرجى إدخال اسم المستخدم وكلمة المرور', 'error');
+            return;
+          }
+
+          // إظهار حالة التحميل
+          const submitBtn = e.target.querySelector('button[type="submit"]');
+          const originalText = submitBtn.innerHTML;
+          submitBtn.innerHTML = '<span class="material-icons animate-spin mr-2">refresh</span>جاري تسجيل الدخول...';
+          submitBtn.disabled = true;
+
+          // محاولة تسجيل الدخول
+          setTimeout(() => {
+            const user = dataManager.authenticateUser(username, password);
+
+            if (user) {
+              // حفظ تفضيل "تذكرني"
+              if (rememberMe) {
+                localStorage.setItem('easystock_remember', 'true');
+              }
+
+              showMessage(`مرحباً ${user.name}! تم تسجيل الدخول بنجاح`, 'success');
+
+              // إعادة توجيه إلى لوحة التحكم
+              setTimeout(() => {
+                window.location.href = 'dashboard.html';
+              }, 1000);
+            } else {
+              showMessage('اسم المستخدم أو كلمة المرور غير صحيحة', 'error');
+              submitBtn.innerHTML = originalText;
+              submitBtn.disabled = false;
+            }
+          }, 1000); // محاكاة وقت الاستجابة
+        });
+      };
+
+      // دالة عرض الرسائل
+      function showMessage(message, type) {
+        // إزالة الرسائل السابقة
+        const existingMessage = document.querySelector('.login-message');
+        if (existingMessage) {
+          existingMessage.remove();
+        }
+
+        // إنشاء رسالة جديدة
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `login-message fixed top-4 right-4 z-50 p-4 rounded-lg shadow-lg max-w-sm ${
+          type === 'success' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'
+        }`;
+        messageDiv.innerHTML = `
+          <div class="flex items-center gap-2">
+            <span class="material-icons">${type === 'success' ? 'check_circle' : 'error'}</span>
+            <span>${message}</span>
+          </div>
+        `;
+
+        document.body.appendChild(messageDiv);
+
+        // إزالة الرسالة بعد 5 ثوان
+        setTimeout(() => {
+          messageDiv.remove();
+        }, 5000);
+      }
+
+      // عرض معلومات المستخدمين التجريبيين
+      function showDemoCredentials() {
+        const credentialsDiv = document.createElement('div');
+        credentialsDiv.className = 'mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg text-sm';
+        credentialsDiv.innerHTML = `
+          <h4 class="font-semibold text-blue-800 mb-2">حسابات تجريبية:</h4>
+          <div class="space-y-1 text-blue-700">
+            <div><strong>مدير:</strong> admin / admin123</div>
+            <div><strong>مستخدم:</strong> user / user123</div>
+            <div><strong>مدير مخزون:</strong> manager / manager123</div>
+          </div>
+        `;
+
+        const form = document.querySelector('form');
+        form.parentNode.insertBefore(credentialsDiv, form.nextSibling);
+      }
+
+      // عرض الحسابات التجريبية بعد تحميل الصفحة
+      setTimeout(showDemoCredentials, 1000);
+    </script>
+
+</body>
+</html>

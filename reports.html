@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Lexend%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Roboto%3Awght%40400%3B500%3B700&amp;display=swap" onload="this.rel='stylesheet'" rel="stylesheet"/>
+<meta charset="utf-8"/>
+<title>Reports - EasyStock Pro</title>
+<link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style type="text/tailwindcss">
+      :root {
+        --primary-color: #197fe5;
+        --secondary-color: #4e7397;--background-color: #f0f4f8;--surface-color: #ffffff;--border-color: #d0dbe7;--text-primary: #0e141b;--text-secondary: #4e7397;}
+      body {
+        font-family: 'Roboto', 'Lexend', "Noto Sans", sans-serif;
+      }
+      .material-icons {
+        font-family: 'Material Icons';
+        font-weight: normal;
+        font-style: normal;
+        font-size: 24px;
+        line-height: 1;
+        letter-spacing: normal;
+        text-transform: none;
+        display: inline-block;
+        white-space: nowrap;
+        word-wrap: normal;
+        direction: ltr;
+        -webkit-font-feature-settings: 'liga';
+        -webkit-font-smoothing: antialiased;
+      }
+    </style>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+</head>
+<body dir="ltr">
+<div class="relative flex size-full min-h-screen flex-col bg-[var(--background-color)] group/design-root overflow-x-hidden" style="--select-button-svg: url('data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2724px%27 height=%2724px%27 fill=%27rgb(78,115,151)%27 viewBox=%270 0 256 256%27%3e%3cpath d=%27M181.66,170.34a8,8,0,0,1,0,11.32l-48,48a8,8,0,0,1-11.32,0l-48-48a8,8,0,0,1,11.32-11.32L128,212.69l42.34-42.35A8,8,0,0,1,181.66,170.34Zm-96-84.68L128,43.31l42.34,42.35a8,8,0,0,0,11.32-11.32l-48-48a8,8,0,0,0-11.32,0l-48,48A8,8,0,0,0,85.66,85.66Z%27%3e%3c/path%3e%3c/svg%3e');">
+<div class="layout-container flex h-full grow flex-col">
+<div class="flex flex-1">
+<aside class="flex flex-col w-72 bg-[var(--surface-color)] shadow-lg min-h-screen p-4">
+<div class="flex items-center gap-3 p-4 border-b border-[var(--border-color)]">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAyQ0RBXrC4BMekVrI-zhzbK5V6Chb45vGQT5OKw2ORsB0txa5Ba-e68te_tcSyI57F6eC-pkl63fBDmxHjSFPmS3VNJbQ892zZvltnQMdTWca2cMWChIt1OcR1xTrZ4AWTxHzjsm4evjs5QX2_rvGZFhsKOqwdytU6XAwyWhj2-KUJUMOJ8oCs1UfYanyEonkQS8ymW5OQRuMfuIYjEguXcYk1Sb18eev6m46y1sGkpyErZCf6GFBCLOlhcVTdcdTxPJYYpyGSw8ny");'></div>
+<h1 class="text-[var(--text-primary)] text-lg font-semibold">EasyStock Pro</h1>
+</div>
+<nav class="flex flex-col gap-2 mt-4 flex-grow">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[var(--background-color)] text-[var(--text-secondary)] transition-colors" href="dashboard.html">
+<span class="material-icons text-[var(--secondary-color)]">dashboard</span>
+<p class="text-sm font-medium">Dashboard</p>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[var(--background-color)] text-[var(--text-secondary)] transition-colors" href="inventory-overview.html">
+<span class="material-icons text-[var(--secondary-color)]">inventory_2</span>
+<p class="text-sm font-medium">Inventory</p>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[var(--background-color)] text-[var(--text-secondary)] transition-colors" href="orders.html">
+<span class="material-icons text-[var(--secondary-color)]">receipt_long</span>
+<p class="text-sm font-medium">Orders</p>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg bg-[var(--primary-color)] text-white shadow-sm" href="reports.html">
+<span class="material-icons text-white">leaderboard</span>
+<p class="text-sm font-medium">Reports</p>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[var(--background-color)] text-[var(--text-secondary)] transition-colors" href="settings.html">
+<span class="material-icons text-[var(--secondary-color)]">settings</span>
+<p class="text-sm font-medium">Settings</p>
+</a>
+</nav>
+<div class="mt-auto">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[var(--background-color)] text-[var(--text-secondary)] transition-colors" href="#">
+<span class="material-icons text-[var(--secondary-color)]">help_outline</span>
+<p class="text-sm font-medium">Help and feedback</p>
+</a>
+<button class="mt-2 w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[var(--background-color)] text-[var(--text-secondary)] transition-colors text-sm font-medium" id="toggle-rtl">
+<span class="material-icons text-[var(--secondary-color)]">translate</span>
+                Switch to Arabic
+              </button>
+<a class="mt-2 flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-red-50 text-red-600 transition-colors" href="logout.html">
+<span class="material-icons text-red-600">logout</span>
+<p class="text-sm font-medium">Logout</p>
+</a>
+</div>
+</aside>
+<main class="flex-1 p-6 md:p-8">
+<header class="mb-8">
+<h1 class="text-[var(--text-primary)] text-3xl font-bold">Reports</h1>
+<p class="text-[var(--text-secondary)] text-base mt-1">Generate custom reports on stock levels, movements, and history.</p>
+</header>
+<div class="bg-[var(--surface-color)] rounded-xl shadow-lg">
+<div class="border-b border-[var(--border-color)]">
+<nav class="flex px-6 gap-4">
+<a class="flex items-center justify-center border-b-2 border-[var(--primary-color)] text-[var(--primary-color)] py-4 px-2" href="#" id="stock-levels-tab">
+<p class="text-sm font-semibold">Stock Levels</p>
+</a>
+<a class="flex items-center justify-center border-b-2 border-transparent text-[var(--text-secondary)] hover:text-[var(--primary-color)] hover:border-[var(--primary-color)]/50 py-4 px-2 transition-colors" href="#" id="movements-tab">
+<p class="text-sm font-semibold">Movements</p>
+</a>
+<a class="flex items-center justify-center border-b-2 border-transparent text-[var(--text-secondary)] hover:text-[var(--primary-color)] hover:border-[var(--primary-color)]/50 py-4 px-2 transition-colors" href="#" id="history-tab">
+<p class="text-sm font-semibold">History</p>
+</a>
+</nav>
+</div>
+<div class="p-6">
+<!-- Stock Levels Tab Content -->
+<div id="stock-levels-content">
+<h2 class="text-[var(--text-primary)] text-xl font-semibold mb-6">Stock Levels Report Configuration</h2>
+<form class="grid grid-cols-1 md:grid-cols-2 gap-6" id="stock-levels-form">
+<div>
+<label class="block text-sm font-medium text-[var(--text-primary)] mb-2" for="warehouse">Warehouse</label>
+<select class="form-select w-full rounded-lg border-[var(--border-color)] bg-[var(--background-color)] focus:border-[var(--primary-color)] focus:ring-1 focus:ring-[var(--primary-color)] h-12 px-4 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-secondary)] appearance-none bg-[image:--select-button-svg] bg-no-repeat bg-[center_right_1rem]" id="warehouse">
+<option value="">All Warehouses</option>
+<option value="main">Main Warehouse</option>
+<option value="secondary">Secondary Warehouse</option>
+</select>
+</div>
+<div>
+<label class="block text-sm font-medium text-[var(--text-primary)] mb-2" for="category">Category</label>
+<select class="form-select w-full rounded-lg border-[var(--border-color)] bg-[var(--background-color)] focus:border-[var(--primary-color)] focus:ring-1 focus:ring-[var(--primary-color)] h-12 px-4 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-secondary)] appearance-none bg-[image:--select-button-svg] bg-no-repeat bg-[center_right_1rem]" id="category">
+<option value="">All Categories</option>
+<option value="electronics">Electronics</option>
+<option value="apparel">Apparel</option>
+<option value="cleaning">Cleaning Supplies</option>
+<option value="personal-care">Personal Care</option>
+<option value="stationery">Stationery</option>
+</select>
+</div>
+<div>
+<label class="block text-sm font-medium text-[var(--text-primary)] mb-2" for="product">Product</label>
+<select class="form-select w-full rounded-lg border-[var(--border-color)] bg-[var(--background-color)] focus:border-[var(--primary-color)] focus:ring-1 focus:ring-[var(--primary-color)] h-12 px-4 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-secondary)] appearance-none bg-[image:--select-button-svg] bg-no-repeat bg-[center_right_1rem]" id="product">
+<option value="">All Products</option>
+<option value="ECFS-001">ECFS-001 - Eco-Friendly Cleaning Spray</option>
+<option value="OCTS-002">OCTS-002 - Organic Cotton T-shirts</option>
+<option value="RPNB-003">RPNB-003 - Recycled Paper Notebooks</option>
+</select>
+</div>
+<div>
+<label class="block text-sm font-medium text-[var(--text-primary)] mb-2" for="status">Status</label>
+<select class="form-select w-full rounded-lg border-[var(--border-color)] bg-[var(--background-color)] focus:border-[var(--primary-color)] focus:ring-1 focus:ring-[var(--primary-color)] h-12 px-4 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-secondary)] appearance-none bg-[image:--select-button-svg] bg-no-repeat bg-[center_right_1rem]" id="status">
+<option value="">All Statuses</option>
+<option value="in_stock">In Stock</option>
+<option value="low_stock">Low Stock</option>
+<option value="out_of_stock">Out of Stock</option>
+</select>
+</div>
+<div class="md:col-span-2 flex justify-end mt-4">
+<button class="flex items-center justify-center gap-2 min-w-[150px] cursor-pointer rounded-lg h-11 px-6 bg-[var(--primary-color)] text-white text-sm font-semibold tracking-wide hover:bg-opacity-90 transition-colors" type="submit">
+<span class="material-icons text-lg">bar_chart</span>
+                      Generate Report
+                    </button>
+</div>
+</form>
+</div>
+
+<!-- Movements Tab Content -->
+<div id="movements-content" class="hidden">
+<h2 class="text-[var(--text-primary)] text-xl font-semibold mb-6">Stock Movements Report Configuration</h2>
+<form class="grid grid-cols-1 md:grid-cols-2 gap-6" id="movements-form">
+<div>
+<label class="block text-sm font-medium text-[var(--text-primary)] mb-2" for="date-from">Date From</label>
+<input type="date" class="form-input w-full rounded-lg border-[var(--border-color)] bg-[var(--background-color)] focus:border-[var(--primary-color)] focus:ring-1 focus:ring-[var(--primary-color)] h-12 px-4 text-sm text-[var(--text-primary)]" id="date-from">
+</div>
+<div>
+<label class="block text-sm font-medium text-[var(--text-primary)] mb-2" for="date-to">Date To</label>
+<input type="date" class="form-input w-full rounded-lg border-[var(--border-color)] bg-[var(--background-color)] focus:border-[var(--primary-color)] focus:ring-1 focus:ring-[var(--primary-color)] h-12 px-4 text-sm text-[var(--text-primary)]" id="date-to">
+</div>
+<div>
+<label class="block text-sm font-medium text-[var(--text-primary)] mb-2" for="movement-type">Movement Type</label>
+<select class="form-select w-full rounded-lg border-[var(--border-color)] bg-[var(--background-color)] focus:border-[var(--primary-color)] focus:ring-1 focus:ring-[var(--primary-color)] h-12 px-4 text-sm text-[var(--text-primary)] appearance-none bg-[image:--select-button-svg] bg-no-repeat bg-[center_right_1rem]" id="movement-type">
+<option value="">All Movement Types</option>
+<option value="inbound">Inbound (Received)</option>
+<option value="outbound">Outbound (Shipped)</option>
+<option value="adjustment">Adjustment</option>
+<option value="transfer">Transfer</option>
+</select>
+</div>
+<div>
+<label class="block text-sm font-medium text-[var(--text-primary)] mb-2" for="movement-category">Category</label>
+<select class="form-select w-full rounded-lg border-[var(--border-color)] bg-[var(--background-color)] focus:border-[var(--primary-color)] focus:ring-1 focus:ring-[var(--primary-color)] h-12 px-4 text-sm text-[var(--text-primary)] appearance-none bg-[image:--select-button-svg] bg-no-repeat bg-[center_right_1rem]" id="movement-category">
+<option value="">All Categories</option>
+<option value="electronics">Electronics</option>
+<option value="apparel">Apparel</option>
+<option value="cleaning">Cleaning Supplies</option>
+<option value="personal-care">Personal Care</option>
+</select>
+</div>
+<div class="md:col-span-2 flex justify-end mt-4">
+<button class="flex items-center justify-center gap-2 min-w-[150px] cursor-pointer rounded-lg h-11 px-6 bg-[var(--primary-color)] text-white text-sm font-semibold tracking-wide hover:bg-opacity-90 transition-colors" type="submit">
+<span class="material-icons text-lg">trending_up</span>
+                      Generate Report
+                    </button>
+</div>
+</form>
+</div>
+
+<!-- History Tab Content -->
+<div id="history-content" class="hidden">
+<h2 class="text-[var(--text-primary)] text-xl font-semibold mb-6">Stock History Report Configuration</h2>
+<form class="grid grid-cols-1 md:grid-cols-2 gap-6" id="history-form">
+<div>
+<label class="block text-sm font-medium text-[var(--text-primary)] mb-2" for="history-product">Specific Product</label>
+<select class="form-select w-full rounded-lg border-[var(--border-color)] bg-[var(--background-color)] focus:border-[var(--primary-color)] focus:ring-1 focus:ring-[var(--primary-color)] h-12 px-4 text-sm text-[var(--text-primary)] appearance-none bg-[image:--select-button-svg] bg-no-repeat bg-[center_right_1rem]" id="history-product">
+<option value="">Select Product</option>
+<option value="ECFS-001">ECFS-001 - Eco-Friendly Cleaning Spray</option>
+<option value="OCTS-002">OCTS-002 - Organic Cotton T-shirts</option>
+<option value="RPNB-003">RPNB-003 - Recycled Paper Notebooks</option>
+</select>
+</div>
+<div>
+<label class="block text-sm font-medium text-[var(--text-primary)] mb-2" for="history-period">Time Period</label>
+<select class="form-select w-full rounded-lg border-[var(--border-color)] bg-[var(--background-color)] focus:border-[var(--primary-color)] focus:ring-1 focus:ring-[var(--primary-color)] h-12 px-4 text-sm text-[var(--text-primary)] appearance-none bg-[image:--select-button-svg] bg-no-repeat bg-[center_right_1rem]" id="history-period">
+<option value="7days">Last 7 Days</option>
+<option value="30days">Last 30 Days</option>
+<option value="90days">Last 90 Days</option>
+<option value="1year">Last Year</option>
+<option value="custom">Custom Range</option>
+</select>
+</div>
+<div class="md:col-span-2" id="custom-date-range" style="display: none;">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div>
+<label class="block text-sm font-medium text-[var(--text-primary)] mb-2" for="history-from">From Date</label>
+<input type="date" class="form-input w-full rounded-lg border-[var(--border-color)] bg-[var(--background-color)] focus:border-[var(--primary-color)] focus:ring-1 focus:ring-[var(--primary-color)] h-12 px-4 text-sm text-[var(--text-primary)]" id="history-from">
+</div>
+<div>
+<label class="block text-sm font-medium text-[var(--text-primary)] mb-2" for="history-to">To Date</label>
+<input type="date" class="form-input w-full rounded-lg border-[var(--border-color)] bg-[var(--background-color)] focus:border-[var(--primary-color)] focus:ring-1 focus:ring-[var(--primary-color)] h-12 px-4 text-sm text-[var(--text-primary)]" id="history-to">
+</div>
+</div>
+</div>
+<div class="md:col-span-2 flex justify-end mt-4">
+<button class="flex items-center justify-center gap-2 min-w-[150px] cursor-pointer rounded-lg h-11 px-6 bg-[var(--primary-color)] text-white text-sm font-semibold tracking-wide hover:bg-opacity-90 transition-colors" type="submit">
+<span class="material-icons text-lg">history</span>
+                      Generate Report
+                    </button>
+</div>
+</form>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+</div>
+<script>
+      // Tab switching functionality
+      const tabs = {
+        'stock-levels-tab': 'stock-levels-content',
+        'movements-tab': 'movements-content',
+        'history-tab': 'history-content'
+      };
+
+      // Initialize tab switching
+      Object.keys(tabs).forEach(tabId => {
+        document.getElementById(tabId).addEventListener('click', (e) => {
+          e.preventDefault();
+
+          // Remove active class from all tabs
+          Object.keys(tabs).forEach(id => {
+            const tab = document.getElementById(id);
+            tab.classList.remove('border-[var(--primary-color)]', 'text-[var(--primary-color)]');
+            tab.classList.add('border-transparent', 'text-[var(--text-secondary)]');
+          });
+
+          // Hide all content
+          Object.values(tabs).forEach(contentId => {
+            document.getElementById(contentId).classList.add('hidden');
+          });
+
+          // Show active tab and content
+          e.target.closest('a').classList.remove('border-transparent', 'text-[var(--text-secondary)]');
+          e.target.closest('a').classList.add('border-[var(--primary-color)]', 'text-[var(--primary-color)]');
+          document.getElementById(tabs[tabId]).classList.remove('hidden');
+        });
+      });
+
+      // Custom date range toggle for history tab
+      document.getElementById('history-period').addEventListener('change', function() {
+        const customRange = document.getElementById('custom-date-range');
+        if (this.value === 'custom') {
+          customRange.style.display = 'block';
+        } else {
+          customRange.style.display = 'none';
+        }
+      });
+
+      // Form submission handlers
+      document.getElementById('stock-levels-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        generateStockLevelsReport();
+      });
+
+      document.getElementById('movements-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        generateMovementsReport();
+      });
+
+      document.getElementById('history-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        generateHistoryReport();
+      });
+
+      // تحميل نظام إدارة البيانات
+      const script = document.createElement('script');
+      script.src = 'js/data-manager.js';
+      document.head.appendChild(script);
+
+      script.onload = function() {
+        // التحقق من تسجيل الدخول
+        const currentUser = dataManager.getCurrentUser();
+        if (!currentUser) {
+          window.location.href = 'login.html';
+          return;
+        }
+
+        // تحديث قوائم الفلاتر بالبيانات الحقيقية
+        updateFilterOptions();
+      };
+
+      // تحديث خيارات الفلاتر
+      function updateFilterOptions() {
+        const products = dataManager.getProducts();
+
+        // تحديث قائمة الفئات
+        const categories = [...new Set(products.map(p => p.category))];
+        updateSelectOptions('category', categories);
+        updateSelectOptions('movement-category', categories);
+
+        // تحديث قائمة المنتجات
+        const productOptions = products.map(p => ({ value: p.sku, text: `${p.sku} - ${p.name}` }));
+        updateSelectOptions('product', productOptions, true);
+        updateSelectOptions('history-product', productOptions, true);
+      }
+
+      // تحديث خيارات القائمة المنسدلة
+      function updateSelectOptions(selectId, options, isObject = false) {
+        const select = document.getElementById(selectId);
+        if (!select) return;
+
+        // الاحتفاظ بالخيار الأول (All/Select)
+        const firstOption = select.firstElementChild;
+        select.innerHTML = '';
+        if (firstOption) {
+          select.appendChild(firstOption);
+        }
+
+        // إضافة الخيارات الجديدة
+        options.forEach(option => {
+          const optionElement = document.createElement('option');
+          if (isObject) {
+            optionElement.value = option.value;
+            optionElement.textContent = option.text;
+          } else {
+            optionElement.value = option;
+            optionElement.textContent = option;
+          }
+          select.appendChild(optionElement);
+        });
+      }
+
+      // Report generation functions
+      function generateStockLevelsReport() {
+        const formData = {
+          warehouse: document.getElementById('warehouse').value,
+          category: document.getElementById('category').value,
+          product: document.getElementById('product').value,
+          status: document.getElementById('status').value
+        };
+
+        // الحصول على البيانات الحقيقية
+        const products = dataManager.searchProducts('', {
+          category: formData.category,
+          stockStatus: formData.status ? formData.status.replace('_', '-') : ''
+        });
+
+        // فلترة حسب المنتج المحدد
+        let filteredProducts = products;
+        if (formData.product) {
+          filteredProducts = products.filter(p => p.sku === formData.product);
+        }
+
+        // إنشاء التقرير
+        const reportData = generateStockLevelsReportData(filteredProducts, formData);
+
+        // عرض التقرير
+        showReportModal('Stock Levels Report', reportData);
+      }
+
+      function generateMovementsReport() {
+        const formData = {
+          dateFrom: document.getElementById('date-from').value,
+          dateTo: document.getElementById('date-to').value,
+          movementType: document.getElementById('movement-type').value,
+          category: document.getElementById('movement-category').value
+        };
+
+        // الحصول على البيانات الحقيقية
+        const movements = dataManager.getMovements();
+
+        // فلترة الحركات
+        let filteredMovements = movements.filter(movement => {
+          const movementDate = new Date(movement.date);
+          const fromDate = formData.dateFrom ? new Date(formData.dateFrom) : new Date('2000-01-01');
+          const toDate = formData.dateTo ? new Date(formData.dateTo) : new Date();
+
+          const dateMatch = movementDate >= fromDate && movementDate <= toDate;
+          const typeMatch = !formData.movementType || movement.type === formData.movementType;
+
+          let categoryMatch = true;
+          if (formData.category) {
+            const product = dataManager.getProduct(movement.productId);
+            categoryMatch = product && product.category === formData.category;
+          }
+
+          return dateMatch && typeMatch && categoryMatch;
+        });
+
+        // إنشاء التقرير
+        const reportData = generateMovementsReportData(filteredMovements, formData);
+
+        // عرض التقرير
+        showReportModal('Stock Movements Report', reportData);
+      }
+
+      function generateHistoryReport() {
+        const formData = {
+          product: document.getElementById('history-product').value,
+          period: document.getElementById('history-period').value,
+          fromDate: document.getElementById('history-from').value,
+          toDate: document.getElementById('history-to').value
+        };
+
+        if (!formData.product) {
+          alert('يرجى اختيار منتج محدد لإنشاء تقرير التاريخ');
+          return;
+        }
+
+        // الحصول على المنتج
+        const products = dataManager.getProducts();
+        const product = products.find(p => p.sku === formData.product);
+
+        if (!product) {
+          alert('المنتج المحدد غير موجود');
+          return;
+        }
+
+        // الحصول على حركات المنتج
+        const movements = dataManager.getMovements().filter(m => m.productId === product.id);
+
+        // فلترة حسب الفترة الزمنية
+        let filteredMovements = movements;
+        if (formData.period === 'custom' && formData.fromDate && formData.toDate) {
+          const fromDate = new Date(formData.fromDate);
+          const toDate = new Date(formData.toDate);
+          filteredMovements = movements.filter(m => {
+            const movementDate = new Date(m.date);
+            return movementDate >= fromDate && movementDate <= toDate;
+          });
+        } else if (formData.period !== 'custom') {
+          const days = getPeriodDays(formData.period);
+          const cutoffDate = new Date();
+          cutoffDate.setDate(cutoffDate.getDate() - days);
+          filteredMovements = movements.filter(m => new Date(m.date) >= cutoffDate);
+        }
+
+        // إنشاء التقرير
+        const reportData = generateHistoryReportData(product, filteredMovements, formData);
+
+        // عرض التقرير
+        showReportModal('Stock History Report', reportData);
+      }
+
+      // الحصول على عدد الأيام للفترة
+      function getPeriodDays(period) {
+        const periods = {
+          '7days': 7,
+          '30days': 30,
+          '90days': 90,
+          '1year': 365
+        };
+        return periods[period] || 30;
+      }
+
+      // RTL toggle functionality
+      const toggleRtlButton = document.getElementById('toggle-rtl');
+      const bodyElement = document.body;
+      const htmlElement = document.documentElement;
+
+      toggleRtlButton.addEventListener('click', () => {
+        if (bodyElement.dir === 'ltr') {
+          bodyElement.dir = 'rtl';
+          htmlElement.dir = 'rtl';
+          toggleRtlButton.innerHTML = '<span class="material-icons text-[var(--secondary-color)]">translate</span> Switch to English';
+        } else {
+          bodyElement.dir = 'ltr';
+          htmlElement.dir = 'ltr';
+          toggleRtlButton.innerHTML = '<span class="material-icons text-[var(--secondary-color)]">translate</span> Switch to Arabic';
+        }
+      });
+
+      // وظائف إنشاء بيانات التقارير
+      function generateStockLevelsReportData(products, filters) {
+        const totalProducts = products.length;
+        const totalQuantity = products.reduce((sum, p) => sum + p.quantity, 0);
+        const totalValue = products.reduce((sum, p) => sum + (p.quantity * (p.price || 0)), 0);
+
+        const lowStockProducts = products.filter(p => p.quantity <= p.reorderPoint);
+        const outOfStockProducts = products.filter(p => p.quantity === 0);
+
+        return {
+          summary: {
+            totalProducts,
+            totalQuantity,
+            totalValue: totalValue.toFixed(2),
+            lowStockCount: lowStockProducts.length,
+            outOfStockCount: outOfStockProducts.length
+          },
+          products: products.map(p => ({
+            name: p.name,
+            sku: p.sku,
+            category: p.category,
+            supplier: p.supplier,
+            quantity: p.quantity,
+            reorderPoint: p.reorderPoint,
+            price: p.price || 0,
+            value: ((p.quantity * (p.price || 0))).toFixed(2),
+            status: p.quantity === 0 ? 'Out of Stock' :
+                   p.quantity <= p.reorderPoint ? 'Low Stock' : 'In Stock'
+          })),
+          filters
+        };
+      }
+
+      function generateMovementsReportData(movements, filters) {
+        const totalMovements = movements.length;
+        const inboundCount = movements.filter(m => m.type === 'inbound').length;
+        const outboundCount = movements.filter(m => m.type === 'outbound').length;
+        const adjustmentCount = movements.filter(m => m.type === 'adjustment').length;
+
+        const totalInbound = movements
+          .filter(m => m.type === 'inbound')
+          .reduce((sum, m) => sum + m.quantity, 0);
+
+        const totalOutbound = movements
+          .filter(m => m.type === 'outbound')
+          .reduce((sum, m) => sum + m.quantity, 0);
+
+        return {
+          summary: {
+            totalMovements,
+            inboundCount,
+            outboundCount,
+            adjustmentCount,
+            totalInbound,
+            totalOutbound,
+            netChange: totalInbound - totalOutbound
+          },
+          movements: movements.map(m => {
+            const product = dataManager.getProduct(m.productId);
+            return {
+              date: new Date(m.date).toLocaleDateString(),
+              product: product ? product.name : 'Unknown Product',
+              sku: product ? product.sku : 'N/A',
+              type: m.type,
+              quantity: m.quantity,
+              reason: m.reason || 'N/A',
+              notes: m.notes || ''
+            };
+          }).sort((a, b) => new Date(b.date) - new Date(a.date)),
+          filters
+        };
+      }
+
+      function generateHistoryReportData(product, movements, filters) {
+        const sortedMovements = movements.sort((a, b) => new Date(a.date) - new Date(b.date));
+
+        let runningQuantity = 0;
+        const history = sortedMovements.map(m => {
+          if (m.type === 'inbound') {
+            runningQuantity += m.quantity;
+          } else if (m.type === 'outbound') {
+            runningQuantity -= m.quantity;
+          } else if (m.type === 'adjustment') {
+            runningQuantity += m.quantity; // يمكن أن يكون سالباً
+          }
+
+          return {
+            date: new Date(m.date).toLocaleDateString(),
+            type: m.type,
+            quantity: m.quantity,
+            runningQuantity: Math.max(0, runningQuantity),
+            reason: m.reason || 'N/A',
+            notes: m.notes || ''
+          };
+        });
+
+        return {
+          product: {
+            name: product.name,
+            sku: product.sku,
+            category: product.category,
+            supplier: product.supplier,
+            currentQuantity: product.quantity,
+            reorderPoint: product.reorderPoint
+          },
+          summary: {
+            totalMovements: movements.length,
+            periodStart: sortedMovements.length > 0 ? new Date(sortedMovements[0].date).toLocaleDateString() : 'N/A',
+            periodEnd: sortedMovements.length > 0 ? new Date(sortedMovements[sortedMovements.length - 1].date).toLocaleDateString() : 'N/A'
+          },
+          history,
+          filters
+        };
+      }
+
+      // عرض نافذة التقرير
+      function showReportModal(title, data) {
+        // إنشاء نافذة منبثقة للتقرير
+        const modal = document.createElement('div');
+        modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4';
+        modal.innerHTML = `
+          <div class="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-hidden">
+            <div class="flex items-center justify-between p-6 border-b">
+              <h3 class="text-xl font-semibold text-[var(--text-primary)]">${title}</h3>
+              <div class="flex gap-2">
+                <button onclick="exportReport('${title}', arguments[0])" class="px-4 py-2 bg-[var(--primary-color)] text-white rounded-lg hover:bg-opacity-90">
+                  <span class="material-icons text-sm mr-1">download</span>
+                  Export
+                </button>
+                <button onclick="this.closest('.fixed').remove()" class="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-opacity-90">
+                  Close
+                </button>
+              </div>
+            </div>
+            <div class="p-6 overflow-y-auto max-h-[70vh]">
+              ${generateReportHTML(data)}
+            </div>
+          </div>
+        `;
+
+        document.body.appendChild(modal);
+
+        // حفظ بيانات التقرير للتصدير
+        modal.reportData = data;
+        modal.reportTitle = title;
+      }
+
+      // إنشاء HTML للتقرير
+      function generateReportHTML(data) {
+        if (data.products) {
+          return generateStockLevelsHTML(data);
+        } else if (data.movements) {
+          return generateMovementsHTML(data);
+        } else if (data.history) {
+          return generateHistoryHTML(data);
+        }
+        return '<p>No data available</p>';
+      }
+
+      // إنشاء HTML لتقرير مستويات المخزون
+      function generateStockLevelsHTML(data) {
+        return `
+          <div class="space-y-6">
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+              <div class="bg-blue-50 p-4 rounded-lg">
+                <div class="text-2xl font-bold text-blue-600">${data.summary.totalProducts}</div>
+                <div class="text-sm text-blue-800">Total Products</div>
+              </div>
+              <div class="bg-green-50 p-4 rounded-lg">
+                <div class="text-2xl font-bold text-green-600">${data.summary.totalQuantity}</div>
+                <div class="text-sm text-green-800">Total Quantity</div>
+              </div>
+              <div class="bg-purple-50 p-4 rounded-lg">
+                <div class="text-2xl font-bold text-purple-600">$${data.summary.totalValue}</div>
+                <div class="text-sm text-purple-800">Total Value</div>
+              </div>
+              <div class="bg-yellow-50 p-4 rounded-lg">
+                <div class="text-2xl font-bold text-yellow-600">${data.summary.lowStockCount}</div>
+                <div class="text-sm text-yellow-800">Low Stock</div>
+              </div>
+              <div class="bg-red-50 p-4 rounded-lg">
+                <div class="text-2xl font-bold text-red-600">${data.summary.outOfStockCount}</div>
+                <div class="text-sm text-red-800">Out of Stock</div>
+              </div>
+            </div>
+
+            <div class="overflow-x-auto">
+              <table class="w-full border-collapse border border-gray-300">
+                <thead class="bg-gray-50">
+                  <tr>
+                    <th class="border border-gray-300 px-4 py-2 text-left">Product Name</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">SKU</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">Category</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">Quantity</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">Reorder Point</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">Value</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${data.products.map(product => `
+                    <tr class="hover:bg-gray-50">
+                      <td class="border border-gray-300 px-4 py-2">${product.name}</td>
+                      <td class="border border-gray-300 px-4 py-2">${product.sku}</td>
+                      <td class="border border-gray-300 px-4 py-2">${product.category}</td>
+                      <td class="border border-gray-300 px-4 py-2">${product.quantity}</td>
+                      <td class="border border-gray-300 px-4 py-2">${product.reorderPoint}</td>
+                      <td class="border border-gray-300 px-4 py-2">$${product.value}</td>
+                      <td class="border border-gray-300 px-4 py-2">
+                        <span class="px-2 py-1 rounded text-xs ${
+                          product.status === 'In Stock' ? 'bg-green-100 text-green-800' :
+                          product.status === 'Low Stock' ? 'bg-yellow-100 text-yellow-800' :
+                          'bg-red-100 text-red-800'
+                        }">${product.status}</span>
+                      </td>
+                    </tr>
+                  `).join('')}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        `;
+      }
+
+      // تصدير التقرير
+      function exportReport(title, data) {
+        // إنشاء محتوى CSV
+        let csvContent = '';
+
+        if (data.products) {
+          csvContent = generateStockLevelsCSV(data);
+        } else if (data.movements) {
+          csvContent = generateMovementsCSV(data);
+        } else if (data.history) {
+          csvContent = generateHistoryCSV(data);
+        }
+
+        // تنزيل الملف
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const link = document.createElement('a');
+        const url = URL.createObjectURL(blob);
+        link.setAttribute('href', url);
+        link.setAttribute('download', `${title.replace(/\s+/g, '_')}_${new Date().toISOString().split('T')[0]}.csv`);
+        link.style.visibility = 'hidden';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        // عرض رسالة نجاح
+        alert('تم تصدير التقرير بنجاح!');
+      }
+
+      // إنشاء CSV لتقرير مستويات المخزون
+      function generateStockLevelsCSV(data) {
+        let csv = 'Product Name,SKU,Category,Supplier,Quantity,Reorder Point,Price,Value,Status\n';
+
+        data.products.forEach(product => {
+          csv += `"${product.name}","${product.sku}","${product.category}","${product.supplier}",${product.quantity},${product.reorderPoint},${product.price},${product.value},"${product.status}"\n`;
+        });
+
+        return csv;
+      }
+
+      // Set default dates for movements tab
+      const today = new Date();
+      const lastMonth = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
+
+      document.getElementById('date-from').value = lastMonth.toISOString().split('T')[0];
+      document.getElementById('date-to').value = today.toISOString().split('T')[0];
+    </script>
+
+</body>
+</html>

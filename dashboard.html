@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Roboto%3Awght%40400%3B500%3B700&amp;family=Lexend%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900" onload="this.rel='stylesheet'" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<title>EasyStock Pro Dashboard</title>
+<link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style type="text/tailwindcss">
+      :root {
+        --primary-color: #197fe5;
+        --secondary-color: #60a5fa;--background-color: #f3f4f6;--card-background-color: #ffffff;
+        --text-primary-color: #1f2937;--text-secondary-color: #6b7280;--border-color: #e5e7eb;--success-color: #10b981;
+        --danger-color: #ef4444;
+      }
+      body {
+        font-family: 'Roboto', 'Lexend', "Noto Sans", sans-serif;
+      }
+
+      /* Enhanced animations and interactions */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes pulse {
+        0%, 100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.5;
+        }
+      }
+
+      @keyframes slideIn {
+        from {
+          transform: translateX(-100%);
+        }
+        to {
+          transform: translateX(0);
+        }
+      }
+
+      .animate-fadeInUp {
+        animation: fadeInUp 0.6s ease-out;
+      }
+
+      .animate-pulse {
+        animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+      }
+
+      .animate-slideIn {
+        animation: slideIn 0.5s ease-out;
+      }
+
+      /* Interactive card effects */
+      .interactive-card {
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+
+      .interactive-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+      }
+
+      /* Chart animations */
+      .chart-element {
+        transition: all 0.3s ease;
+      }
+
+      .chart-element:hover {
+        filter: brightness(1.1);
+      }
+
+      /* Loading states */
+      .loading-shimmer {
+        background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+        background-size: 200% 100%;
+        animation: shimmer 1.5s infinite;
+      }
+
+      @keyframes shimmer {
+        0% {
+          background-position: 200% 0;
+        }
+        100% {
+          background-position: -200% 0;
+        }
+      }
+
+      /* Notification badge pulse */
+      .notification-badge {
+        animation: pulse 2s infinite;
+      }
+
+      /* Smooth transitions for all interactive elements */
+      button, .interactive-element {
+        transition: all 0.2s ease;
+      }
+
+      button:hover {
+        transform: translateY(-1px);
+      }
+
+      button:active {
+        transform: translateY(0);
+      }
+      .material-icons {
+        font-family: 'Material Icons';
+        font-weight: normal;
+        font-style: normal;
+        font-size: 24px;display: inline-block;
+        line-height: 1;
+        text-transform: none;
+        letter-spacing: normal;
+        word-wrap: normal;
+        white-space: nowrap;
+        direction: ltr;-webkit-font-smoothing: antialiased;text-rendering: optimizeLegibility;-moz-osx-font-smoothing: grayscale;font-feature-settings: 'liga';
+      }
+    </style>
+</head>
+<body dir="ltr"> 
+<div class="relative flex size-full min-h-screen flex-col bg-[var(--background-color)] group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[var(--border-color)] px-6 md:px-10 py-4 bg-[var(--card-background-color)] shadow-sm">
+<div class="flex items-center gap-3 text-[var(--text-primary-color)]">
+<span class="material-icons text-[var(--primary-color)] text-3xl">inventory_2</span>
+<h1 class="text-[var(--text-primary-color)] text-xl font-bold leading-tight tracking-[-0.015em]">EasyStock Pro</h1>
+</div>
+<div class="flex flex-1 justify-end gap-4 md:gap-6 items-center">
+<div class="relative w-full max-w-xs">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-icons text-[var(--text-secondary-color)]">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[var(--text-primary-color)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] border border-[var(--border-color)] bg-white h-10 placeholder:text-[var(--text-secondary-color)] pl-10 pr-3 text-sm font-normal leading-normal" placeholder="Search..." type="search" value=""/>
+</div>
+<button class="relative flex items-center justify-center rounded-full h-10 w-10 hover:bg-gray-100 text-[var(--text-secondary-color)] hover:text-[var(--primary-color)] transition-colors">
+<span class="material-icons">notifications</span>
+<span class="absolute top-1 right-1 h-2 w-2 rounded-full bg-[var(--danger-color)]"></span>
+</button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-[var(--primary-color)]" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAsXwYFF6aR5u6CD43ZYKVv8-3X0GtVLZefkit9qLojNJMTiYeRA7YT4E3otTfbk1dfUzNwRflOJQDOqO6MP34wwTc1O3VdVaHGOLHUbuYDvvt4bnVqtNYC7WS4THXAviHpT4pckQIomJeCAlOuNvH3Ty3He6IPHVabHEbNjd-Qo2JCoTPh8CivtWzi7kwfJhSj8jTNpRhFC2JTnRDm0L73PbsbDYLUqbvvFmpZNPBXE-dmfPuXuGDRcsayhmFRDt43PScvuIBp17i4");'></div>
+<button class="flex items-center justify-center rounded-full h-10 w-10 hover:bg-gray-100 text-[var(--text-secondary-color)] hover:text-[var(--primary-color)] transition-colors" id="language-toggle">
+<span class="material-icons">language</span>
+</button>
+<button onclick="window.location.href='logout.html'" class="flex items-center justify-center rounded-full h-10 w-10 hover:bg-red-50 text-red-600 hover:text-red-700 transition-colors" title="Logout">
+<span class="material-icons">logout</span>
+</button>
+</div>
+</header>
+<main class="px-4 md:px-10 flex flex-1 justify-center py-6 md:py-8">
+<div class="layout-content-container flex flex-col w-full max-w-6xl">
+<div class="flex flex-wrap justify-between items-center gap-3 mb-6 px-1">
+<h2 class="text-[var(--text-primary-color)] text-3xl font-bold leading-tight">Dashboard</h2>
+<div class="flex gap-3">
+<button onclick="window.location.href='add-item.html'" class="flex items-center gap-2 rounded-lg bg-[var(--primary-color)] px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 transition-colors">
+<span class="material-icons text-lg">add</span>
+Add Item
+</button>
+<button onclick="window.location.href='inventory-overview.html'" class="flex items-center gap-2 rounded-lg border border-[var(--border-color)] bg-white px-4 py-2 text-sm font-medium text-[var(--text-primary-color)] hover:bg-gray-50 transition-colors">
+<span class="material-icons text-lg">inventory</span>
+View Inventory
+</button>
+<button onclick="window.location.href='reports.html'" class="flex items-center gap-2 rounded-lg border border-[var(--border-color)] bg-white px-4 py-2 text-sm font-medium text-[var(--text-primary-color)] hover:bg-gray-50 transition-colors">
+<span class="material-icons text-lg">leaderboard</span>
+Reports
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-8">
+<div class="flex flex-col gap-2 rounded-xl p-6 bg-[var(--card-background-color)] shadow-lg border border-[var(--border-color)]">
+<div class="flex items-center justify-between">
+<p class="text-[var(--text-primary-color)] text-lg font-medium leading-normal">Total Stock</p>
+<span class="material-icons text-[var(--primary-color)]">inventory</span>
+</div>
+<p class="text-[var(--text-primary-color)] text-4xl font-bold leading-tight">12,345</p>
+<div class="flex items-center text-sm">
+<span class="material-icons text-[var(--success-color)] text-base mr-1">arrow_upward</span>
+<p class="text-[var(--success-color)] font-medium">+12%</p>
+<p class="text-[var(--text-secondary-color)] ml-2">vs last month</p>
+</div>
+</div>
+<div class="flex flex-col gap-2 rounded-xl p-6 bg-[var(--card-background-color)] shadow-lg border border-[var(--border-color)]">
+<div class="flex items-center justify-between">
+<p class="text-[var(--text-primary-color)] text-lg font-medium leading-normal">Recent Activities</p>
+<span class="material-icons text-[var(--primary-color)]">local_shipping</span>
+</div>
+<p class="text-[var(--text-primary-color)] text-4xl font-bold leading-tight">567</p>
+<div class="flex items-center text-sm">
+<span class="material-icons text-[var(--danger-color)] text-base mr-1">arrow_downward</span>
+<p class="text-[var(--danger-color)] font-medium">-5%</p>
+<p class="text-[var(--text-secondary-color)] ml-2">vs last week</p>
+</div>
+</div>
+<div class="flex flex-col gap-2 rounded-xl p-6 bg-[var(--card-background-color)] shadow-lg border border-[var(--border-color)]">
+<div class="flex items-center justify-between">
+<p class="text-[var(--text-primary-color)] text-lg font-medium leading-normal">Alerts</p>
+<span class="material-icons text-[var(--danger-color)]">warning</span>
+</div>
+<p class="text-[var(--text-primary-color)] text-4xl font-bold leading-tight">23</p>
+<div class="flex items-center text-sm">
+<span class="material-icons text-[var(--success-color)] text-base mr-1">arrow_upward</span>
+<p class="text-[var(--success-color)] font-medium">+2</p>
+<p class="text-[var(--text-secondary-color)] ml-2">new alerts</p>
+</div>
+</div>
+</div>
+<h3 class="text-[var(--text-primary-color)] text-2xl font-semibold leading-tight tracking-[-0.015em] px-1 mb-4">Inventory Overview</h3>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6 mb-8">
+<div class="flex flex-col gap-4 rounded-xl border border-[var(--border-color)] p-6 bg-[var(--card-background-color)] shadow-lg">
+<p class="text-[var(--text-primary-color)] text-lg font-medium leading-normal">Stock Levels</p>
+<div class="flex items-baseline gap-2">
+<p class="text-[var(--text-primary-color)] text-3xl font-bold leading-tight truncate">12,345</p>
+<div class="flex items-center text-sm">
+<span class="material-icons text-[var(--success-color)] text-base mr-1">arrow_upward</span>
+<p class="text-[var(--success-color)] font-medium">+12%</p>
+</div>
+</div>
+<p class="text-[var(--text-secondary-color)] text-sm font-normal leading-normal">Last 30 Days</p>
+<div class="grid min-h-[200px] grid-flow-col gap-3 items-end justify-items-center px-2 pt-4">
+<div class="bg-[var(--secondary-color)] w-full rounded-t-md" style="height: 90%;"></div>
+<div class="bg-[var(--secondary-color)] w-full rounded-t-md" style="height: 40%;"></div>
+<div class="bg-[var(--secondary-color)] w-full rounded-t-md" style="height: 60%;"></div>
+<div class="bg-[var(--secondary-color)] w-full rounded-t-md" style="height: 80%;"></div>
+<div class="bg-[var(--secondary-color)] w-full rounded-t-md" style="height: 30%;"></div>
+<div class="bg-[var(--secondary-color)] w-full rounded-t-md" style="height: 50%;"></div>
+<div class="bg-[var(--primary-color)] w-full rounded-t-md" style="height: 100%;"></div>
+</div>
+<div class="grid grid-flow-col gap-3 justify-items-center">
+<p class="text-[var(--text-secondary-color)] text-xs font-medium">Jan</p>
+<p class="text-[var(--text-secondary-color)] text-xs font-medium">Feb</p>
+<p class="text-[var(--text-secondary-color)] text-xs font-medium">Mar</p>
+<p class="text-[var(--text-secondary-color)] text-xs font-medium">Apr</p>
+<p class="text-[var(--text-secondary-color)] text-xs font-medium">May</p>
+<p class="text-[var(--text-secondary-color)] text-xs font-medium">Jun</p>
+<p class="text-[var(--text-secondary-color)] text-xs font-medium">Jul</p>
+</div>
+</div>
+<div class="flex flex-col gap-4 rounded-xl border border-[var(--border-color)] p-6 bg-[var(--card-background-color)] shadow-lg">
+<p class="text-[var(--text-primary-color)] text-lg font-medium leading-normal">Activity Trends</p>
+<div class="flex items-baseline gap-2">
+<p class="text-[var(--text-primary-color)] text-3xl font-bold leading-tight truncate">567</p>
+<div class="flex items-center text-sm">
+<span class="material-icons text-[var(--danger-color)] text-base mr-1">arrow_downward</span>
+<p class="text-[var(--danger-color)] font-medium">-5%</p>
+</div>
+</div>
+<p class="text-[var(--text-secondary-color)] text-sm font-normal leading-normal">Last 7 Days</p>
+<div class="flex min-h-[200px] flex-1 flex-col gap-4 py-4">
+<svg fill="none" height="100%" preserveAspectRatio="xMidYMax meet" viewBox="-3 0 478 150" width="100%" xmlns="http://www.w3.org/2000/svg">
+<path d="M0 109C18.1538 109 18.1538 21 36.3077 21C54.4615 21 54.4615 41 72.6154 41C90.7692 41 90.7692 93 108.923 93C127.077 93 127.077 33 145.231 33C163.385 33 163.385 101 181.538 101C199.692 101 199.692 61 217.846 61C236 61 236 45 254.154 45C272.308 45 272.308 121 290.462 121C308.615 121 308.615 149 326.769 149C344.923 149 344.923 1 363.077 1C381.231 1 381.231 81 399.385 81C417.538 81 417.538 129 435.692 129C453.846 129 453.846 25 472 25V149H326.769H0V109Z" fill="url(#paint0_linear_area_chart)"></path>
+<path d="M0 109C18.1538 109 18.1538 21 36.3077 21C54.4615 21 54.4615 41 72.6154 41C90.7692 41 90.7692 93 108.923 93C127.077 93 127.077 33 145.231 33C163.385 33 163.385 101 181.538 101C199.692 101 199.692 61 217.846 61C236 61 236 45 254.154 45C272.308 45 272.308 121 290.462 121C308.615 121 308.615 149 326.769 149C344.923 149 344.923 1 363.077 1C381.231 1 381.231 81 399.385 81C417.538 81 417.538 129 435.692 129C453.846 129 453.846 25 472 25" stroke="var(--primary-color)" stroke-linecap="round" stroke-width="3"></path>
+<defs>
+<linearGradient gradientUnits="userSpaceOnUse" id="paint0_linear_area_chart" x1="236" x2="236" y1="1" y2="149">
+<stop stop-color="var(--primary-color)" stop-opacity="0.3"></stop>
+<stop offset="1" stop-color="var(--primary-color)" stop-opacity="0"></stop>
+</linearGradient>
+</defs>
+</svg>
+<div class="flex justify-around">
+<p class="text-[var(--text-secondary-color)] text-xs font-medium">Mon</p>
+<p class="text-[var(--text-secondary-color)] text-xs font-medium">Tue</p>
+<p class="text-[var(--text-secondary-color)] text-xs font-medium">Wed</p>
+<p class="text-[var(--text-secondary-color)] text-xs font-medium">Thu</p>
+<p class="text-[var(--text-secondary-color)] text-xs font-medium">Fri</p>
+<p class="text-[var(--text-secondary-color)] text-xs font-medium">Sat</p>
+<p class="text-[var(--text-secondary-color)] text-xs font-medium">Sun</p>
+</div>
+</div>
+</div>
+</div>
+<h3 class="text-[var(--text-primary-color)] text-2xl font-semibold leading-tight tracking-[-0.015em] px-1 mb-4">Recent Activities</h3>
+<div class="px-1 @container">
+<div class="overflow-x-auto rounded-lg border border-[var(--border-color)] bg-[var(--card-background-color)] shadow-lg">
+<table class="w-full">
+<thead class="bg-gray-50">
+<tr>
+<th class="table-col-date px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-[var(--text-secondary-color)]">Date</th>
+<th class="table-col-activity px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-[var(--text-secondary-color)]">Activity</th>
+<th class="table-col-details px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-[var(--text-secondary-color)]">Details</th>
+<th class="table-col-status px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-[var(--text-secondary-color)] @[640px]:table-cell hidden">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[var(--border-color)]">
+<tr class="hover:bg-gray-50 transition-colors">
+<td class="table-col-date px-4 py-3 whitespace-nowrap text-sm text-[var(--text-primary-color)]">2024-07-26</td>
+<td class="table-col-activity px-4 py-3 whitespace-nowrap text-sm text-[var(--text-primary-color)]">Stock Received</td>
+<td class="table-col-details px-4 py-3 whitespace-nowrap text-sm text-[var(--text-primary-color)]">100 units of Product A</td>
+<td class="table-col-status px-4 py-3 whitespace-nowrap text-sm @[640px]:table-cell hidden">
+<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Completed</span>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 transition-colors">
+<td class="table-col-date px-4 py-3 whitespace-nowrap text-sm text-[var(--text-primary-color)]">2024-07-25</td>
+<td class="table-col-activity px-4 py-3 whitespace-nowrap text-sm text-[var(--text-primary-color)]">Stock Shipped</td>
+<td class="table-col-details px-4 py-3 whitespace-nowrap text-sm text-[var(--text-primary-color)]">50 units of Product B</td>
+<td class="table-col-status px-4 py-3 whitespace-nowrap text-sm @[640px]:table-cell hidden">
+<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">Shipped</span>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 transition-colors">
+<td class="table-col-date px-4 py-3 whitespace-nowrap text-sm text-[var(--text-primary-color)]">2024-07-24</td>
+<td class="table-col-activity px-4 py-3 whitespace-nowrap text-sm text-[var(--text-primary-color)]">Stock Adjustment</td>
+<td class="table-col-details px-4 py-3 whitespace-nowrap text-sm text-[var(--text-primary-color)]">-20 units of Product C (Damaged)</td>
+<td class="table-col-status px-4 py-3 whitespace-nowrap text-sm @[640px]:table-cell hidden">
+<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">Adjusted</span>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 transition-colors">
+<td class="table-col-date px-4 py-3 whitespace-nowrap text-sm text-[var(--text-primary-color)]">2024-07-23</td>
+<td class="table-col-activity px-4 py-3 whitespace-nowrap text-sm text-[var(--text-primary-color)]">Stock Received</td>
+<td class="table-col-details px-4 py-3 whitespace-nowrap text-sm text-[var(--text-primary-color)]">75 units of Product D</td>
+<td class="table-col-status px-4 py-3 whitespace-nowrap text-sm @[640px]:table-cell hidden">
+<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Completed</span>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 transition-colors">
+<td class="table-col-date px-4 py-3 whitespace-nowrap text-sm text-[var(--text-primary-color)]">2024-07-22</td>
+<td class="table-col-activity px-4 py-3 whitespace-nowrap text-sm text-[var(--text-primary-color)]">Stock Shipped</td>
+<td class="table-col-details px-4 py-3 whitespace-nowrap text-sm text-[var(--text-primary-color)]">30 units of Product E</td>
+<td class="table-col-status px-4 py-3 whitespace-nowrap text-sm @[640px]:table-cell hidden">
+<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">Shipped</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<style>@container (max-width: 500px) {
+                  .table-col-details { display: none; }
+                }
+                 @container (max-width: 400px) {
+                  .table-col-activity { display: none; }
+                }
+              </style>
+</div>
+</div>
+</main>
+</div>
+</div>
+<script>
+      // تحميل نظام إدارة البيانات
+      const dataScript = document.createElement('script');
+      dataScript.src = 'js/data-manager.js';
+      document.head.appendChild(dataScript);
+
+      // تحميل نظام الإشعارات
+      const notificationScript = document.createElement('script');
+      notificationScript.src = 'js/notifications.js';
+      document.head.appendChild(notificationScript);
+
+      dataScript.onload = function() {
+        // التحقق من تسجيل الدخول
+        const currentUser = dataManager.getCurrentUser();
+        if (!currentUser) {
+          window.location.href = 'login.html';
+          return;
+        }
+
+        // تحديث الواجهة بالبيانات الحقيقية
+        updateDashboard();
+
+        // تحديث البيانات كل 30 ثانية
+        setInterval(updateDashboard, 30000);
+
+        // تحديث الإشعارات عند تحميل نظام الإشعارات
+        notificationScript.onload = function() {
+          // ربط زر الإشعارات
+          const notificationBtn = document.querySelector('button:has(.material-icons:contains("notifications"))');
+          if (notificationBtn) {
+            notificationBtn.addEventListener('click', (e) => {
+              e.preventDefault();
+              notificationSystem.showNotificationPanel();
+            });
+          }
+        };
+      };
+
+      // تحديث لوحة التحكم بالبيانات الحقيقية
+      function updateDashboard() {
+        showLoadingState();
+
+        // Simulate loading delay for better UX
+        setTimeout(() => {
+          const stats = dataManager.getStatistics();
+
+          // تحديث الإحصائيات الرئيسية مع تأثيرات بصرية
+          updateMainStatsWithAnimation(stats);
+
+          // تحديث جدول الأنشطة الحديثة
+          updateRecentActivities(stats.recentMovements);
+
+          // تحديث الرسوم البيانية التفاعلية
+          updateInteractiveCharts(stats);
+
+          // إخفاء حالة التحميل
+          hideLoadingState();
+
+          // إضافة مؤشر آخر تحديث
+          updateLastRefreshTime();
+        }, 500);
+      }
+
+      // عرض حالة التحميل
+      function showLoadingState() {
+        const loadingOverlay = document.createElement('div');
+        loadingOverlay.id = 'dashboard-loading';
+        loadingOverlay.className = 'fixed top-0 left-0 w-full h-1 bg-blue-200 z-50';
+        loadingOverlay.innerHTML = '<div class="h-full bg-blue-500 animate-pulse" style="width: 0%; transition: width 0.5s ease;"></div>';
+        document.body.appendChild(loadingOverlay);
+
+        // Animate loading bar
+        setTimeout(() => {
+          loadingOverlay.querySelector('div').style.width = '100%';
+        }, 100);
+      }
+
+      // إخفاء حالة التحميل
+      function hideLoadingState() {
+        const loadingOverlay = document.getElementById('dashboard-loading');
+        if (loadingOverlay) {
+          setTimeout(() => loadingOverlay.remove(), 200);
+        }
+      }
+
+      // تحديث وقت آخر تحديث
+      function updateLastRefreshTime() {
+        let refreshIndicator = document.getElementById('last-refresh');
+        if (!refreshIndicator) {
+          refreshIndicator = document.createElement('div');
+          refreshIndicator.id = 'last-refresh';
+          refreshIndicator.className = 'fixed bottom-4 right-4 bg-white shadow-lg rounded-lg px-3 py-2 text-xs text-gray-600 border';
+          document.body.appendChild(refreshIndicator);
+        }
+
+        const now = new Date();
+        refreshIndicator.innerHTML = `
+          <div class="flex items-center gap-2">
+            <span class="material-icons text-green-500 text-sm">refresh</span>
+            <span>Last updated: ${now.toLocaleTimeString()}</span>
+          </div>
+        `;
+
+        // Auto-hide after 3 seconds
+        setTimeout(() => {
+          if (refreshIndicator) {
+            refreshIndicator.style.opacity = '0';
+            refreshIndicator.style.transform = 'translateY(10px)';
+          }
+        }, 3000);
+
+        // Reset visibility for next update
+        setTimeout(() => {
+          if (refreshIndicator) {
+            refreshIndicator.style.opacity = '1';
+            refreshIndicator.style.transform = 'translateY(0)';
+          }
+        }, 6000);
+      }
+
+      // تحديث الإحصائيات الرئيسية مع تأثيرات بصرية
+      function updateMainStatsWithAnimation(stats) {
+        // إجمالي المخزون مع تأثير العد
+        const totalStockElement = document.querySelector('.grid .flex-col:first-child p.text-4xl');
+        if (totalStockElement) {
+          animateNumber(totalStockElement, parseInt(totalStockElement.textContent.replace(/,/g, '')) || 0, stats.totalQuantity);
+        }
+
+        // الأنشطة الحديثة
+        const recentActivitiesElement = document.querySelector('.grid .flex-col:nth-child(2) p.text-4xl');
+        if (recentActivitiesElement) {
+          animateNumber(recentActivitiesElement, parseInt(recentActivitiesElement.textContent) || 0, stats.recentMovements.length);
+        }
+
+        // التنبيهات مع تغيير اللون حسب الحالة
+        const alertsElement = document.querySelector('.grid .flex-col:nth-child(3) p.text-4xl');
+        if (alertsElement) {
+          const totalAlerts = stats.lowStockCount + stats.outOfStockCount;
+          animateNumber(alertsElement, parseInt(alertsElement.textContent) || 0, totalAlerts);
+
+          // تغيير لون التنبيهات حسب العدد
+          const alertCard = alertsElement.closest('.flex-col');
+          if (totalAlerts > 10) {
+            alertCard.classList.add('bg-red-50', 'border-red-200');
+            alertCard.classList.remove('bg-yellow-50', 'border-yellow-200');
+          } else if (totalAlerts > 5) {
+            alertCard.classList.add('bg-yellow-50', 'border-yellow-200');
+            alertCard.classList.remove('bg-red-50', 'border-red-200');
+          } else {
+            alertCard.classList.remove('bg-red-50', 'border-red-200', 'bg-yellow-50', 'border-yellow-200');
+          }
+        }
+
+        // تحديث النسب المئوية مع تأثيرات
+        updatePercentagesWithAnimation(stats);
+
+        // تحديث قيمة المخزون الإجمالية
+        updateTotalValue(stats);
+      }
+
+      // تأثير العد المتحرك للأرقام
+      function animateNumber(element, startValue, endValue, duration = 1000) {
+        const startTime = performance.now();
+        const difference = endValue - startValue;
+
+        function updateNumber(currentTime) {
+          const elapsed = currentTime - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+
+          // استخدام easing function للحصول على تأثير أكثر سلاسة
+          const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+          const currentValue = Math.round(startValue + (difference * easeOutQuart));
+
+          element.textContent = currentValue.toLocaleString();
+
+          if (progress < 1) {
+            requestAnimationFrame(updateNumber);
+          }
+        }
+
+        requestAnimationFrame(updateNumber);
+      }
+
+      // تحديث قيمة المخزون الإجمالية
+      function updateTotalValue(stats) {
+        let valueElement = document.getElementById('total-value-display');
+        if (!valueElement) {
+          // إضافة عنصر عرض القيمة الإجمالية إذا لم يكن موجوداً
+          const statsGrid = document.querySelector('.grid.grid-cols-1.md\\:grid-cols-3');
+          if (statsGrid) {
+            const valueCard = document.createElement('div');
+            valueCard.className = 'flex flex-col gap-3 p-4 bg-purple-50 border border-purple-200 rounded-lg';
+            valueCard.innerHTML = `
+              <div class="flex items-center gap-2">
+                <span class="material-icons text-purple-600">attach_money</span>
+                <p class="text-[var(--text-secondary-color)] text-sm font-medium">Total Value</p>
+              </div>
+              <p class="text-4xl font-bold text-purple-600" id="total-value-display">$0</p>
+              <div class="flex items-center gap-1">
+                <span class="material-icons text-sm text-purple-600">trending_up</span>
+                <p class="text-purple-600 text-sm font-medium">Portfolio Value</p>
+              </div>
+            `;
+            statsGrid.appendChild(valueCard);
+            valueElement = document.getElementById('total-value-display');
+          }
+        }
+
+        if (valueElement && stats.totalValue) {
+          const currentValue = parseFloat(valueElement.textContent.replace(/[$,]/g, '')) || 0;
+          animateNumber(valueElement, currentValue, stats.totalValue);
+          // Format as currency
+          setTimeout(() => {
+            valueElement.textContent = `$${stats.totalValue.toLocaleString()}`;
+          }, 1000);
+        }
+      }
+
+      // تحديث النسب المئوية
+      function updatePercentages(stats) {
+        // حساب التغيير في المخزون (محاكاة)
+        const stockChangeElement = document.querySelector('.grid .flex-col:first-child .flex.items-center p.font-medium');
+        if (stockChangeElement) {
+          const randomChange = Math.floor(Math.random() * 20) - 10; // -10 إلى +10
+          stockChangeElement.textContent = `${randomChange > 0 ? '+' : ''}${randomChange}%`;
+          stockChangeElement.className = `font-medium ${randomChange > 0 ? 'text-[var(--success-color)]' : 'text-[var(--danger-color)]'}`;
+
+          const arrowElement = stockChangeElement.previousElementSibling;
+          if (arrowElement) {
+            arrowElement.textContent = randomChange > 0 ? 'arrow_upward' : 'arrow_downward';
+            arrowElement.className = `material-icons text-base mr-1 ${randomChange > 0 ? 'text-[var(--success-color)]' : 'text-[var(--danger-color)]'}`;
+          }
+        }
+      }
+
+      // تحديث جدول الأنشطة الحديثة
+      function updateRecentActivities(movements) {
+        const tableBody = document.querySelector('tbody');
+        if (!tableBody) return;
+
+        // مسح المحتوى الحالي
+        tableBody.innerHTML = '';
+
+        // إضافة الحركات الحديثة
+        movements.slice(0, 5).forEach(movement => {
+          const product = dataManager.getProduct(movement.productId);
+          if (!product) return;
+
+          const row = document.createElement('tr');
+          row.className = 'hover:bg-gray-50 transition-colors';
+
+          const statusBadge = getMovementStatusBadge(movement.type);
+          const formattedDate = new Date(movement.date).toLocaleDateString();
+
+          row.innerHTML = `
+            <td class="table-col-date px-4 py-3 whitespace-nowrap text-sm text-[var(--text-primary-color)]">${formattedDate}</td>
+            <td class="table-col-activity px-4 py-3 whitespace-nowrap text-sm text-[var(--text-primary-color)]">${getMovementTypeText(movement.type)}</td>
+            <td class="table-col-details px-4 py-3 whitespace-nowrap text-sm text-[var(--text-primary-color)]">${movement.quantity} units of ${product.name}</td>
+            <td class="table-col-status px-4 py-3 whitespace-nowrap text-sm @[640px]:table-cell hidden">
+              ${statusBadge}
+            </td>
+          `;
+
+          tableBody.appendChild(row);
+        });
+      }
+
+      // الحصول على نص نوع الحركة
+      function getMovementTypeText(type) {
+        const types = {
+          'inbound': 'Stock Received',
+          'outbound': 'Stock Shipped',
+          'adjustment': 'Stock Adjustment',
+          'transfer': 'Stock Transfer'
+        };
+        return types[type] || 'Unknown';
+      }
+
+      // الحصول على شارة حالة الحركة
+      function getMovementStatusBadge(type) {
+        const badges = {
+          'inbound': '<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Received</span>',
+          'outbound': '<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">Shipped</span>',
+          'adjustment': '<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">Adjusted</span>',
+          'transfer': '<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-purple-100 text-purple-800">Transferred</span>'
+        };
+        return badges[type] || '<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800">Unknown</span>';
+      }
+
+      // تحديث الرسوم البيانية التفاعلية
+      function updateInteractiveCharts(stats) {
+        // تحديث الرسم البياني الشريطي التفاعلي
+        updateInteractiveBarChart(stats);
+
+        // تحديث رسم الأنشطة الخطي التفاعلي
+        updateActivityTrendsChart(stats);
+
+        // إضافة مخطط دائري لتوزيع الفئات
+        updateCategoryDistributionChart(stats);
+      }
+
+      // تحديث الرسم البياني الشريطي التفاعلي
+      function updateInteractiveBarChart(stats) {
+        const chartContainer = document.querySelector('.grid.min-h-\\[200px\\]');
+        if (!chartContainer) return;
+
+        // إضافة عنوان تفاعلي
+        let chartTitle = chartContainer.querySelector('.chart-title');
+        if (!chartTitle) {
+          chartTitle = document.createElement('div');
+          chartTitle.className = 'chart-title text-sm font-medium text-gray-600 mb-2 flex items-center justify-between';
+          chartTitle.innerHTML = `
+            <span>Monthly Stock Levels</span>
+            <button onclick="refreshChart('bar')" class="text-blue-500 hover:text-blue-700">
+              <span class="material-icons text-sm">refresh</span>
+            </button>
+          `;
+          chartContainer.insertBefore(chartTitle, chartContainer.firstChild);
+        }
+
+        const bars = chartContainer.querySelectorAll('.bg-\\[var\\(--secondary-color\\)\\], .bg-\\[var\\(--primary-color\\)\\]');
+        const products = dataManager.getProducts();
+
+        bars.forEach((bar, index) => {
+          // حساب الارتفاع بناءً على البيانات الحقيقية
+          const categoryData = getCategoryData(products, index);
+          const maxQuantity = Math.max(...products.map(p => p.quantity));
+          const height = maxQuantity > 0 ? (categoryData.quantity / maxQuantity) * 80 + 20 : 20;
+
+          // تأثير الانتقال السلس
+          bar.style.transition = 'height 0.8s ease-in-out, background-color 0.3s ease';
+          bar.style.height = `${height}%`;
+
+          // تغيير اللون حسب الحالة
+          if (categoryData.lowStock) {
+            bar.style.backgroundColor = '#ef4444'; // أحمر للمخزون المنخفض
+          } else if (categoryData.quantity > categoryData.average) {
+            bar.style.backgroundColor = '#10b981'; // أخضر للمخزون الجيد
+          } else {
+            bar.style.backgroundColor = 'var(--primary-color)'; // اللون الافتراضي
+          }
+
+          // إضافة tooltip تفاعلي
+          bar.title = `Category ${index + 1}: ${categoryData.quantity} items`;
+
+          // إضافة تأثير hover
+          bar.addEventListener('mouseenter', function() {
+            this.style.transform = 'scaleY(1.1)';
+            this.style.transformOrigin = 'bottom';
+          });
+
+          bar.addEventListener('mouseleave', function() {
+            this.style.transform = 'scaleY(1)';
+          });
+        });
+      }
+
+      // الحصول على بيانات الفئة
+      function getCategoryData(products, categoryIndex) {
+        const categories = [...new Set(products.map(p => p.category))];
+        const category = categories[categoryIndex % categories.length];
+        const categoryProducts = products.filter(p => p.category === category);
+
+        const quantity = categoryProducts.reduce((sum, p) => sum + p.quantity, 0);
+        const average = products.reduce((sum, p) => sum + p.quantity, 0) / products.length;
+        const lowStock = categoryProducts.some(p => p.quantity <= p.reorderPoint);
+
+        return { quantity, average, lowStock, category };
+      }
+
+      // تحديث رسم الأنشطة الخطي التفاعلي
+      function updateActivityTrendsChart(stats) {
+        const chartContainer = document.querySelector('.flex.h-\\[200px\\]');
+        if (!chartContainer) return;
+
+        // إضافة عنوان ومعلومات تفاعلية
+        let chartHeader = chartContainer.querySelector('.chart-header');
+        if (!chartHeader) {
+          chartHeader = document.createElement('div');
+          chartHeader.className = 'chart-header mb-4';
+          chartHeader.innerHTML = `
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="text-sm font-medium text-gray-700">Activity Trends (Last 7 Days)</h3>
+              <div class="flex gap-2">
+                <button onclick="changeChartPeriod('7days')" class="px-2 py-1 text-xs bg-blue-100 text-blue-700 rounded">7D</button>
+                <button onclick="changeChartPeriod('30days')" class="px-2 py-1 text-xs bg-gray-100 text-gray-700 rounded">30D</button>
+                <button onclick="refreshChart('activity')" class="text-blue-500 hover:text-blue-700">
+                  <span class="material-icons text-sm">refresh</span>
+                </button>
+              </div>
+            </div>
+            <div class="flex gap-4 text-xs text-gray-600">
+              <div class="flex items-center gap-1">
+                <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                <span>Inbound: <span id="inbound-count">0</span></span>
+              </div>
+              <div class="flex items-center gap-1">
+                <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                <span>Outbound: <span id="outbound-count">0</span></span>
+              </div>
+              <div class="flex items-center gap-1">
+                <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                <span>Adjustments: <span id="adjustment-count">0</span></span>
+              </div>
+            </div>
+          `;
+          chartContainer.insertBefore(chartHeader, chartContainer.firstChild);
+        }
+
+        // تحديث الإحصائيات
+        const movements = dataManager.getMovements();
+        const last7Days = movements.filter(m => {
+          const movementDate = new Date(m.date);
+          const weekAgo = new Date();
+          weekAgo.setDate(weekAgo.getDate() - 7);
+          return movementDate >= weekAgo;
+        });
+
+        document.getElementById('inbound-count').textContent = last7Days.filter(m => m.type === 'inbound').length;
+        document.getElementById('outbound-count').textContent = last7Days.filter(m => m.type === 'outbound').length;
+        document.getElementById('adjustment-count').textContent = last7Days.filter(m => m.type === 'adjustment').length;
+
+        // إنشاء رسم بياني خطي بسيط باستخدام SVG
+        createInteractiveLineChart(chartContainer, last7Days);
+      }
+
+      // إنشاء رسم بياني خطي تفاعلي
+      function createInteractiveLineChart(container, movements) {
+        let svgContainer = container.querySelector('.svg-chart-container');
+        if (!svgContainer) {
+          svgContainer = document.createElement('div');
+          svgContainer.className = 'svg-chart-container relative bg-gray-50 rounded-lg p-4';
+          svgContainer.style.height = '150px';
+          container.appendChild(svgContainer);
+        }
+
+        // تجميع البيانات حسب اليوم
+        const dailyData = groupMovementsByDay(movements);
+
+        // إنشاء SVG
+        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        svg.setAttribute('width', '100%');
+        svg.setAttribute('height', '120');
+        svg.setAttribute('viewBox', '0 0 300 120');
+
+        // رسم الخطوط
+        drawActivityLines(svg, dailyData);
+
+        // إضافة نقاط تفاعلية
+        addInteractivePoints(svg, dailyData);
+
+        svgContainer.innerHTML = '';
+        svgContainer.appendChild(svg);
+      }
+
+      // تجميع الحركات حسب اليوم
+      function groupMovementsByDay(movements) {
+        const dailyData = {};
+        const last7Days = [];
+
+        // إنشاء آخر 7 أيام
+        for (let i = 6; i >= 0; i--) {
+          const date = new Date();
+          date.setDate(date.getDate() - i);
+          const dateStr = date.toISOString().split('T')[0];
+          last7Days.push(dateStr);
+          dailyData[dateStr] = { inbound: 0, outbound: 0, adjustment: 0 };
+        }
+
+        // تجميع الحركات
+        movements.forEach(movement => {
+          const dateStr = movement.date.split('T')[0];
+          if (dailyData[dateStr]) {
+            dailyData[dateStr][movement.type]++;
+          }
+        });
+
+        return last7Days.map(date => ({
+          date,
+          ...dailyData[date]
+        }));
+      }
+
+      // رسم خطوط النشاط
+      function drawActivityLines(svg, data) {
+        const width = 300;
+        const height = 120;
+        const padding = 20;
+
+        const maxValue = Math.max(...data.map(d => Math.max(d.inbound, d.outbound, d.adjustment))) || 1;
+
+        // رسم خط الوارد (أخضر)
+        const inboundPath = createPath(data.map(d => d.inbound), width, height, padding, maxValue);
+        const inboundLine = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        inboundLine.setAttribute('d', inboundPath);
+        inboundLine.setAttribute('stroke', '#10b981');
+        inboundLine.setAttribute('stroke-width', '2');
+        inboundLine.setAttribute('fill', 'none');
+        inboundLine.style.transition = 'all 0.3s ease';
+        svg.appendChild(inboundLine);
+
+        // رسم خط الصادر (أحمر)
+        const outboundPath = createPath(data.map(d => d.outbound), width, height, padding, maxValue);
+        const outboundLine = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        outboundLine.setAttribute('d', outboundPath);
+        outboundLine.setAttribute('stroke', '#ef4444');
+        outboundLine.setAttribute('stroke-width', '2');
+        outboundLine.setAttribute('fill', 'none');
+        outboundLine.style.transition = 'all 0.3s ease';
+        svg.appendChild(outboundLine);
+      }
+
+      // إنشاء مسار SVG
+      function createPath(values, width, height, padding, maxValue) {
+        const stepX = (width - 2 * padding) / (values.length - 1);
+        let path = '';
+
+        values.forEach((value, index) => {
+          const x = padding + index * stepX;
+          const y = height - padding - (value / maxValue) * (height - 2 * padding);
+
+          if (index === 0) {
+            path += `M ${x} ${y}`;
+          } else {
+            path += ` L ${x} ${y}`;
+          }
+        });
+
+        return path;
+      }
+
+      // إضافة نقاط تفاعلية
+      function addInteractivePoints(svg, data) {
+        const width = 300;
+        const height = 120;
+        const padding = 20;
+        const stepX = (width - 2 * padding) / (data.length - 1);
+        const maxValue = Math.max(...data.map(d => Math.max(d.inbound, d.outbound, d.adjustment))) || 1;
+
+        data.forEach((dayData, index) => {
+          const x = padding + index * stepX;
+
+          // نقطة للوارد
+          const inboundY = height - padding - (dayData.inbound / maxValue) * (height - 2 * padding);
+          const inboundPoint = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+          inboundPoint.setAttribute('cx', x);
+          inboundPoint.setAttribute('cy', inboundY);
+          inboundPoint.setAttribute('r', '4');
+          inboundPoint.setAttribute('fill', '#10b981');
+          inboundPoint.style.cursor = 'pointer';
+          inboundPoint.addEventListener('mouseenter', () => showTooltip(x, inboundY, `Inbound: ${dayData.inbound}`, dayData.date));
+          svg.appendChild(inboundPoint);
+
+          // نقطة للصادر
+          const outboundY = height - padding - (dayData.outbound / maxValue) * (height - 2 * padding);
+          const outboundPoint = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+          outboundPoint.setAttribute('cx', x);
+          outboundPoint.setAttribute('cy', outboundY);
+          outboundPoint.setAttribute('r', '4');
+          outboundPoint.setAttribute('fill', '#ef4444');
+          outboundPoint.style.cursor = 'pointer';
+          outboundPoint.addEventListener('mouseenter', () => showTooltip(x, outboundY, `Outbound: ${dayData.outbound}`, dayData.date));
+          svg.appendChild(outboundPoint);
+        });
+      }
+
+      // عرض tooltip
+      function showTooltip(x, y, text, date) {
+        // إزالة tooltip السابق
+        const existingTooltip = document.querySelector('.chart-tooltip');
+        if (existingTooltip) existingTooltip.remove();
+
+        const tooltip = document.createElement('div');
+        tooltip.className = 'chart-tooltip absolute bg-black text-white text-xs rounded px-2 py-1 pointer-events-none z-10';
+        tooltip.innerHTML = `${text}<br><small>${new Date(date).toLocaleDateString()}</small>`;
+        tooltip.style.left = `${x}px`;
+        tooltip.style.top = `${y - 40}px`;
+        tooltip.style.transform = 'translateX(-50%)';
+
+        document.querySelector('.svg-chart-container').appendChild(tooltip);
+
+        // إزالة بعد 3 ثوان
+        setTimeout(() => tooltip.remove(), 3000);
+      }
+
+      // تحديث الرسم البياني الشريطي
+      function updateBarChart(stats) {
+        const bars = document.querySelectorAll('.grid.min-h-\\[200px\\] .bg-\\[var\\(--secondary-color\\)\\], .grid.min-h-\\[200px\\] .bg-\\[var\\(--primary-color\\)\\]');
+
+        bars.forEach((bar, index) => {
+          // إنشاء ارتفاعات عشوائية بناءً على البيانات الحقيقية
+          const baseHeight = Math.max(20, (stats.totalQuantity / stats.totalProducts) / 10);
+          const randomVariation = Math.random() * 50 + 30;
+          const height = Math.min(100, baseHeight + randomVariation);
+
+          bar.style.height = `${height}%`;
+        });
+      }
+
+      // تحديث الرسم البياني الخطي
+      function updateLineChart(stats) {
+        // الرسم البياني الخطي معقد أكثر، سنتركه كما هو للآن
+        // في تطبيق حقيقي، سنستخدم مكتبة مثل Chart.js
+      }
+
+      // وظائف التفاعل الإضافية
+
+      // تحديث الرسم البياني
+      function refreshChart(chartType) {
+        const button = event.target.closest('button');
+        const icon = button.querySelector('.material-icons');
+
+        // تأثير الدوران
+        icon.style.transform = 'rotate(360deg)';
+        icon.style.transition = 'transform 0.5s ease';
+
+        setTimeout(() => {
+          icon.style.transform = 'rotate(0deg)';
+          updateDashboard();
+        }, 500);
+      }
+
+      // تغيير فترة الرسم البياني
+      function changeChartPeriod(period) {
+        // تحديث الأزرار النشطة
+        document.querySelectorAll('.chart-header button').forEach(btn => {
+          btn.classList.remove('bg-blue-100', 'text-blue-700');
+          btn.classList.add('bg-gray-100', 'text-gray-700');
+        });
+
+        event.target.classList.remove('bg-gray-100', 'text-gray-700');
+        event.target.classList.add('bg-blue-100', 'text-blue-700');
+
+        // تحديث البيانات حسب الفترة المحددة
+        const stats = dataManager.getStatistics();
+        updateActivityTrendsChart(stats);
+      }
+
+      // إضافة مخطط دائري لتوزيع الفئات
+      function updateCategoryDistributionChart(stats) {
+        let pieChartContainer = document.getElementById('category-pie-chart');
+        if (!pieChartContainer) {
+          // إنشاء حاوية المخطط الدائري
+          const chartsSection = document.querySelector('.grid.grid-cols-1.lg\\:grid-cols-2');
+          if (chartsSection) {
+            const pieChartCard = document.createElement('div');
+            pieChartCard.className = 'bg-white p-6 rounded-lg shadow-lg border border-gray-200';
+            pieChartCard.innerHTML = `
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-semibold text-gray-800">Category Distribution</h3>
+                <button onclick="refreshChart('pie')" class="text-blue-500 hover:text-blue-700">
+                  <span class="material-icons text-sm">refresh</span>
+                </button>
+              </div>
+              <div id="category-pie-chart" class="flex items-center justify-center h-48">
+                <!-- Pie chart will be generated here -->
+              </div>
+              <div id="category-legend" class="mt-4 grid grid-cols-2 gap-2 text-xs">
+                <!-- Legend will be generated here -->
+              </div>
+            `;
+            chartsSection.appendChild(pieChartCard);
+            pieChartContainer = document.getElementById('category-pie-chart');
+          }
+        }
+
+        if (pieChartContainer) {
+          createPieChart(pieChartContainer, stats);
+        }
+      }
+
+      // إنشاء مخطط دائري
+      function createPieChart(container, stats) {
+        const products = dataManager.getProducts();
+        const categoryData = {};
+
+        // تجميع البيانات حسب الفئة
+        products.forEach(product => {
+          if (!categoryData[product.category]) {
+            categoryData[product.category] = 0;
+          }
+          categoryData[product.category] += product.quantity;
+        });
+
+        const categories = Object.keys(categoryData);
+        const total = Object.values(categoryData).reduce((sum, val) => sum + val, 0);
+
+        if (total === 0) {
+          container.innerHTML = '<div class="text-gray-500">No data available</div>';
+          return;
+        }
+
+        // ألوان للفئات
+        const colors = ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#06b6d4'];
+
+        // إنشاء SVG للمخطط الدائري
+        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        svg.setAttribute('width', '150');
+        svg.setAttribute('height', '150');
+        svg.setAttribute('viewBox', '0 0 150 150');
+
+        let currentAngle = 0;
+        const centerX = 75;
+        const centerY = 75;
+        const radius = 60;
+
+        categories.forEach((category, index) => {
+          const value = categoryData[category];
+          const percentage = (value / total) * 100;
+          const angle = (value / total) * 360;
+
+          // إنشاء قطاع دائري
+          const slice = createPieSlice(centerX, centerY, radius, currentAngle, angle, colors[index % colors.length]);
+          slice.addEventListener('mouseenter', function() {
+            this.style.transform = 'scale(1.05)';
+            this.style.transformOrigin = `${centerX}px ${centerY}px`;
+            this.style.transition = 'transform 0.2s ease';
+          });
+
+          slice.addEventListener('mouseleave', function() {
+            this.style.transform = 'scale(1)';
+          });
+
+          slice.title = `${category}: ${value} items (${percentage.toFixed(1)}%)`;
+          svg.appendChild(slice);
+
+          currentAngle += angle;
+        });
+
+        container.innerHTML = '';
+        container.appendChild(svg);
+
+        // تحديث الأسطورة
+        updatePieLegend(categories, categoryData, colors, total);
+      }
+
+      // إنشاء قطاع دائري
+      function createPieSlice(centerX, centerY, radius, startAngle, angle, color) {
+        const startAngleRad = (startAngle * Math.PI) / 180;
+        const endAngleRad = ((startAngle + angle) * Math.PI) / 180;
+
+        const x1 = centerX + radius * Math.cos(startAngleRad);
+        const y1 = centerY + radius * Math.sin(startAngleRad);
+        const x2 = centerX + radius * Math.cos(endAngleRad);
+        const y2 = centerY + radius * Math.sin(endAngleRad);
+
+        const largeArcFlag = angle > 180 ? 1 : 0;
+
+        const pathData = [
+          `M ${centerX} ${centerY}`,
+          `L ${x1} ${y1}`,
+          `A ${radius} ${radius} 0 ${largeArcFlag} 1 ${x2} ${y2}`,
+          'Z'
+        ].join(' ');
+
+        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        path.setAttribute('d', pathData);
+        path.setAttribute('fill', color);
+        path.setAttribute('stroke', 'white');
+        path.setAttribute('stroke-width', '2');
+        path.style.cursor = 'pointer';
+
+        return path;
+      }
+
+      // تحديث أسطورة المخطط الدائري
+      function updatePieLegend(categories, categoryData, colors, total) {
+        const legendContainer = document.getElementById('category-legend');
+        if (!legendContainer) return;
+
+        legendContainer.innerHTML = categories.map((category, index) => {
+          const value = categoryData[category];
+          const percentage = ((value / total) * 100).toFixed(1);
+
+          return `
+            <div class="flex items-center gap-2">
+              <div class="w-3 h-3 rounded-full" style="background-color: ${colors[index % colors.length]}"></div>
+              <span class="text-gray-700">${category}</span>
+              <span class="text-gray-500">(${percentage}%)</span>
+            </div>
+          `;
+        }).join('');
+      }
+
+      // إضافة تأثيرات بصرية للبطاقات
+      function addCardInteractions() {
+        const cards = document.querySelectorAll('.bg-white, .bg-\\[var\\(--card-background-color\\)\\]');
+
+        cards.forEach(card => {
+          card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-2px)';
+            this.style.boxShadow = '0 10px 25px rgba(0,0,0,0.1)';
+            this.style.transition = 'all 0.3s ease';
+          });
+
+          card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+            this.style.boxShadow = '';
+          });
+        });
+      }
+
+      // تحديث الإحصائيات في الوقت الفعلي
+      function startRealTimeUpdates() {
+        // تحديث كل 30 ثانية
+        setInterval(() => {
+          updateDashboard();
+        }, 30000);
+
+        // تحديث كل 5 ثوان للإشعارات
+        setInterval(() => {
+          if (window.notificationSystem) {
+            notificationSystem.updateNotificationBadge();
+          }
+        }, 5000);
+      }
+
+      // تبديل اللغة مع تأثيرات
+      const languageToggle = document.getElementById('language-toggle');
+      const body = document.body;
+      let currentLang = 'ltr';
+
+      if (languageToggle) {
+        languageToggle.addEventListener('click', () => {
+          // تأثير التحميل
+          languageToggle.style.transform = 'rotate(180deg)';
+          languageToggle.style.transition = 'transform 0.3s ease';
+
+          setTimeout(() => {
+            if (currentLang === 'ltr') {
+              body.dir = 'rtl';
+              currentLang = 'rtl';
+            } else {
+              body.dir = 'ltr';
+              currentLang = 'ltr';
+            }
+
+            languageToggle.style.transform = 'rotate(0deg)';
+          }, 300);
+        });
+      }
+
+      // تهيئة التفاعلات عند تحميل الصفحة
+      document.addEventListener('DOMContentLoaded', function() {
+        addCardInteractions();
+        startRealTimeUpdates();
+      });
+    </script>
+
+</body>
+</html>

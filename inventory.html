@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Roboto:wght@400;500;700&amp;family=Lexend:wght@400;500;700;900&amp;family=Noto+Sans:wght@400;500;700;900" onload="this.rel='stylesheet'" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<title>Inventory - EasyStock Pro</title>
+<link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style type="text/tailwindcss">
+      :root {
+        --primary-color: #197fe5;
+        --secondary-color: #60a5fa;--background-color: #f3f4f6;--card-background-color: #ffffff;
+        --text-primary-color: #1f2937;--text-secondary-color: #6b7280;--border-color: #e5e7eb;--success-color: #10b981;
+        --danger-color: #ef4444;--warning-color: #f59e0b;
+      }
+      body {
+        font-family: 'Roboto', 'Lexend', "Noto Sans", sans-serif;
+      }
+      .material-icons {
+        font-family: 'Material Icons';
+        font-weight: normal;
+        font-style: normal;
+        font-size: 24px;display: inline-block;
+        line-height: 1;
+        text-transform: none;
+        letter-spacing: normal;
+        word-wrap: normal;
+        white-space: nowrap;
+        direction: ltr;-webkit-font-smoothing: antialiased;text-rendering: optimizeLegibility;-moz-osx-font-smoothing: grayscale;font-feature-settings: 'liga';
+      }
+    </style>
+</head>
+<body dir="ltr"> 
+<div class="relative flex size-full min-h-screen flex-col bg-[var(--background-color)] group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[var(--border-color)] px-6 md:px-10 py-4 bg-[var(--card-background-color)] shadow-sm">
+<div class="flex items-center gap-3 text-[var(--text-primary-color)]">
+<span class="material-icons text-[var(--primary-color)] text-3xl">inventory_2</span>
+<h1 class="text-[var(--text-primary-color)] text-xl font-bold leading-tight tracking-[-0.015em]">EasyStock Pro</h1>
+</div>
+<div class="flex flex-1 justify-end gap-4 md:gap-6 items-center">
+<div class="relative w-full max-w-xs">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-icons text-[var(--text-secondary-color)]">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[var(--text-primary-color)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] border border-[var(--border-color)] bg-white h-10 placeholder:text-[var(--text-secondary-color)] pl-10 pr-3 text-sm font-normal leading-normal" placeholder="Search inventory..." type="search" id="searchInput"/>
+</div>
+<button class="relative flex items-center justify-center rounded-full h-10 w-10 hover:bg-gray-100 text-[var(--text-secondary-color)] hover:text-[var(--primary-color)] transition-colors">
+<span class="material-icons">notifications</span>
+<span class="absolute top-1 right-1 h-2 w-2 rounded-full bg-[var(--danger-color)]"></span>
+</button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-[var(--primary-color)]" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAsXwYFF6aR5u6CD43ZYKVv8-3X0GtVLZefkit9qLojNJMTiYeRA7YT4E3otTfbk1dfUzNwRflOJQDOqO6MP34wwTc1O3VdVaHGOLHUbuYDvvt4bnVqtNYC7WS4THXAviHpT4pckQIomJeCAlOuNvH3Ty3He6IPHVabHEbNjd-Qo2JCoTPh8CivtWzi7kwfJhSj8jTNpRhFC2JTnRDm0L73PbsbDYLUqbvvFmpZNPBXE-dmfPuXuGDRcsayhmFRDt43PScvuIBp17i4");'></div>
+<button class="flex items-center justify-center rounded-full h-10 w-10 hover:bg-gray-100 text-[var(--text-secondary-color)] hover:text-[var(--primary-color)] transition-colors" id="language-toggle">
+<span class="material-icons">language</span>
+</button>
+</div>
+</header>
+<main class="px-4 md:px-10 flex flex-1 justify-center py-6 md:py-8">
+<div class="layout-content-container flex flex-col w-full max-w-7xl">
+<div class="flex flex-wrap justify-between items-center gap-3 mb-6 px-1">
+<h2 class="text-[var(--text-primary-color)] text-3xl font-bold leading-tight">Inventory Management</h2>
+<div class="flex gap-3">
+<button onclick="window.location.href='add-item.html'" class="flex items-center gap-2 rounded-lg bg-[var(--primary-color)] px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 transition-colors">
+<span class="material-icons text-lg">add</span>
+Add New Item
+</button>
+<button onclick="window.location.href='dashboard.html'" class="flex items-center gap-2 rounded-lg border border-[var(--border-color)] bg-white px-4 py-2 text-sm font-medium text-[var(--text-primary-color)] hover:bg-gray-50 transition-colors">
+<span class="material-icons text-lg">dashboard</span>
+Dashboard
+</button>
+</div>
+</div>
+
+<!-- Filter and Sort Controls -->
+<div class="flex flex-wrap gap-4 mb-6 p-4 bg-white rounded-lg shadow-sm border border-[var(--border-color)]">
+<div class="flex-1 min-w-48">
+<label class="block text-sm font-medium text-[var(--text-primary-color)] mb-1">Category</label>
+<select class="form-select w-full rounded-lg border-[var(--border-color)] bg-white focus:border-[var(--primary-color)] focus:ring-1 focus:ring-[var(--primary-color)] h-10 px-3 text-sm" id="categoryFilter">
+<option value="">All Categories</option>
+<option value="electronics">Electronics</option>
+<option value="apparel">Apparel</option>
+<option value="groceries">Groceries</option>
+<option value="furniture">Furniture</option>
+<option value="books">Books</option>
+<option value="sports">Sports & Outdoors</option>
+</select>
+</div>
+<div class="flex-1 min-w-48">
+<label class="block text-sm font-medium text-[var(--text-primary-color)] mb-1">Stock Status</label>
+<select class="form-select w-full rounded-lg border-[var(--border-color)] bg-white focus:border-[var(--primary-color)] focus:ring-1 focus:ring-[var(--primary-color)] h-10 px-3 text-sm" id="stockFilter">
+<option value="">All Stock Levels</option>
+<option value="in-stock">In Stock</option>
+<option value="low-stock">Low Stock</option>
+<option value="out-of-stock">Out of Stock</option>
+</select>
+</div>
+<div class="flex-1 min-w-48">
+<label class="block text-sm font-medium text-[var(--text-primary-color)] mb-1">Sort By</label>
+<select class="form-select w-full rounded-lg border-[var(--border-color)] bg-white focus:border-[var(--primary-color)] focus:ring-1 focus:ring-[var(--primary-color)] h-10 px-3 text-sm" id="sortBy">
+<option value="name">Name (A-Z)</option>
+<option value="quantity">Quantity</option>
+<option value="category">Category</option>
+<option value="date">Date Added</option>
+</select>
+</div>
+</div>
+
+<!-- Inventory Table -->
+<div class="bg-white rounded-lg shadow-lg border border-[var(--border-color)] overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full" id="inventoryTable">
+<thead class="bg-gray-50">
+<tr>
+<th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-[var(--text-secondary-color)]">Item</th>
+<th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-[var(--text-secondary-color)]">Category</th>
+<th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-[var(--text-secondary-color)]">SKU</th>
+<th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-[var(--text-secondary-color)]">Quantity</th>
+<th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-[var(--text-secondary-color)]">Status</th>
+<th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-[var(--text-secondary-color)]">Supplier</th>
+<th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-[var(--text-secondary-color)]">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[var(--border-color)]" id="inventoryTableBody">
+<!-- Table rows will be populated by JavaScript -->
+</tbody>
+</table>
+</div>
+</div>
+
+<!-- Pagination -->
+<div class="flex items-center justify-between mt-6 px-1">
+<div class="text-sm text-[var(--text-secondary-color)]">
+Showing <span id="showingStart">1</span> to <span id="showingEnd">10</span> of <span id="totalItems">25</span> items
+</div>
+<div class="flex gap-2">
+<button class="px-3 py-2 text-sm font-medium text-[var(--text-secondary-color)] bg-white border border-[var(--border-color)] rounded-lg hover:bg-gray-50 disabled:opacity-50" id="prevPage" disabled>
+Previous
+</button>
+<button class="px-3 py-2 text-sm font-medium text-white bg-[var(--primary-color)] border border-[var(--primary-color)] rounded-lg">
+1
+</button>
+<button class="px-3 py-2 text-sm font-medium text-[var(--text-secondary-color)] bg-white border border-[var(--border-color)] rounded-lg hover:bg-gray-50">
+2
+</button>
+<button class="px-3 py-2 text-sm font-medium text-[var(--text-secondary-color)] bg-white border border-[var(--border-color)] rounded-lg hover:bg-gray-50">
+3
+</button>
+<button class="px-3 py-2 text-sm font-medium text-[var(--text-secondary-color)] bg-white border border-[var(--border-color)] rounded-lg hover:bg-gray-50" id="nextPage">
+Next
+</button>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+<script>
+      // Sample inventory data
+      const inventoryData = [
+        { id: 1, name: 'Premium Quality T-Shirt', category: 'apparel', sku: '1234567890123', quantity: 150, supplier: 'Fashion Forward Inc.', status: 'in-stock', dateAdded: '2024-07-20' },
+        { id: 2, name: 'Wireless Bluetooth Headphones', category: 'electronics', sku: '9876543210987', quantity: 25, supplier: 'Global Electronics Ltd.', status: 'in-stock', dateAdded: '2024-07-18' },
+        { id: 3, name: 'Organic Coffee Beans', category: 'groceries', sku: '5555666677778', quantity: 5, supplier: 'Quality Goods Co.', status: 'low-stock', dateAdded: '2024-07-15' },
+        { id: 4, name: 'Office Desk Chair', category: 'furniture', sku: '1111222233334', quantity: 0, supplier: 'Tech Solutions LLC', status: 'out-of-stock', dateAdded: '2024-07-10' },
+        { id: 5, name: 'Smartphone Case', category: 'electronics', sku: '4444555566667', quantity: 75, supplier: 'Global Electronics Ltd.', status: 'in-stock', dateAdded: '2024-07-22' },
+        { id: 6, name: 'Running Shoes', category: 'sports', sku: '7777888899990', quantity: 12, supplier: 'Fashion Forward Inc.', status: 'low-stock', dateAdded: '2024-07-19' },
+        { id: 7, name: 'Programming Book', category: 'books', sku: '2222333344445', quantity: 30, supplier: 'Quality Goods Co.', status: 'in-stock', dateAdded: '2024-07-16' },
+        { id: 8, name: 'Kitchen Blender', category: 'electronics', sku: '8888999900001', quantity: 8, supplier: 'Tech Solutions LLC', status: 'low-stock', dateAdded: '2024-07-14' },
+        { id: 9, name: 'Winter Jacket', category: 'apparel', sku: '3333444455556', quantity: 45, supplier: 'Fashion Forward Inc.', status: 'in-stock', dateAdded: '2024-07-21' },
+        { id: 10, name: 'Yoga Mat', category: 'sports', sku: '6666777788889', quantity: 20, supplier: 'Quality Goods Co.', status: 'in-stock', dateAdded: '2024-07-17' }
+      ];
+
+      let filteredData = [...inventoryData];
+      let currentPage = 1;
+      const itemsPerPage = 10;
+
+      // Function to get status badge HTML
+      function getStatusBadge(status) {
+        const statusConfig = {
+          'in-stock': { class: 'bg-green-100 text-green-800', text: 'In Stock' },
+          'low-stock': { class: 'bg-yellow-100 text-yellow-800', text: 'Low Stock' },
+          'out-of-stock': { class: 'bg-red-100 text-red-800', text: 'Out of Stock' }
+        };
+        const config = statusConfig[status] || statusConfig['in-stock'];
+        return `<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${config.class}">${config.text}</span>`;
+      }
+
+      // Function to render table
+      function renderTable() {
+        const tableBody = document.getElementById('inventoryTableBody');
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
+        const pageData = filteredData.slice(startIndex, endIndex);
+
+        tableBody.innerHTML = pageData.map(item => `
+          <tr class="hover:bg-gray-50 transition-colors">
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="text-sm font-medium text-[var(--text-primary-color)]">${item.name}</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="text-sm text-[var(--text-primary-color)] capitalize">${item.category}</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="text-sm text-[var(--text-primary-color)]">${item.sku}</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="text-sm font-medium text-[var(--text-primary-color)]">${item.quantity}</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              ${getStatusBadge(item.status)}
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="text-sm text-[var(--text-primary-color)]">${item.supplier}</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+              <button class="text-[var(--primary-color)] hover:text-blue-700 mr-3" onclick="editItem(${item.id})">
+                <span class="material-icons text-lg">edit</span>
+              </button>
+              <button class="text-[var(--danger-color)] hover:text-red-700" onclick="deleteItem(${item.id})">
+                <span class="material-icons text-lg">delete</span>
+              </button>
+            </td>
+          </tr>
+        `).join('');
+
+        // Update pagination info
+        document.getElementById('showingStart').textContent = startIndex + 1;
+        document.getElementById('showingEnd').textContent = Math.min(endIndex, filteredData.length);
+        document.getElementById('totalItems').textContent = filteredData.length;
+      }
+
+      // Function to apply filters
+      function applyFilters() {
+        const categoryFilter = document.getElementById('categoryFilter').value;
+        const stockFilter = document.getElementById('stockFilter').value;
+        const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+        const sortBy = document.getElementById('sortBy').value;
+
+        filteredData = inventoryData.filter(item => {
+          const matchesCategory = !categoryFilter || item.category === categoryFilter;
+          const matchesStock = !stockFilter || item.status === stockFilter;
+          const matchesSearch = !searchTerm ||
+            item.name.toLowerCase().includes(searchTerm) ||
+            item.sku.includes(searchTerm) ||
+            item.supplier.toLowerCase().includes(searchTerm);
+
+          return matchesCategory && matchesStock && matchesSearch;
+        });
+
+        // Sort data
+        filteredData.sort((a, b) => {
+          switch(sortBy) {
+            case 'name': return a.name.localeCompare(b.name);
+            case 'quantity': return b.quantity - a.quantity;
+            case 'category': return a.category.localeCompare(b.category);
+            case 'date': return new Date(b.dateAdded) - new Date(a.dateAdded);
+            default: return 0;
+          }
+        });
+
+        currentPage = 1;
+        renderTable();
+      }
+
+      // Event listeners
+      document.getElementById('categoryFilter').addEventListener('change', applyFilters);
+      document.getElementById('stockFilter').addEventListener('change', applyFilters);
+      document.getElementById('sortBy').addEventListener('change', applyFilters);
+      document.getElementById('searchInput').addEventListener('input', applyFilters);
+
+      // Action functions
+      function editItem(id) {
+        const item = inventoryData.find(item => item.id === id);
+        if (item) {
+          alert(`Edit item: ${item.name}\n(This would open an edit form in a real application)`);
+        }
+      }
+
+      function deleteItem(id) {
+        const item = inventoryData.find(item => item.id === id);
+        if (item && confirm(`Are you sure you want to delete "${item.name}"?`)) {
+          const index = inventoryData.findIndex(item => item.id === id);
+          inventoryData.splice(index, 1);
+          applyFilters();
+          alert('Item deleted successfully!');
+        }
+      }
+
+      // Language toggle
+      document.getElementById('language-toggle').addEventListener('click', () => {
+        document.body.dir = document.body.dir === 'rtl' ? 'ltr' : 'rtl';
+      });
+
+      // Initialize table
+      renderTable();
+    </script>
+
+</body>
+</html>

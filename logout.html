@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Roboto:wght@400;500;700&amp;family=Lexend%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900" onload="this.rel='stylesheet'" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<title>EasyStock Pro - Logout</title>
+<link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style type="text/tailwindcss">
+      :root {
+        --md-sys-color-primary: #197fe5;--md-sys-color-on-primary: #ffffff;
+        --md-sys-color-surface: #f8f9fa;--md-sys-color-on-surface: #1c1b1f;--md-sys-color-outline: #79747e;
+        --md-sys-color-surface-variant: #e7edf3;--md-sys-color-on-surface-variant: #49454f;
+        --md-ref-typeface-brand: 'Roboto', sans-serif;
+        --md-ref-typeface-plain: 'Roboto', sans-serif;
+      }
+      html[dir="rtl"] .material-icons {
+        transform: scaleX(-1);
+      }
+      .material-icons {
+        font-size: 24px;
+      }
+    </style>
+</head>
+<body class="bg-[var(--md-sys-color-surface)]" style="font-family: var(--md-ref-typeface-brand);">
+<div class="relative flex size-full min-h-screen flex-col group/design-root overflow-x-hidden text-[var(--md-sys-color-on-surface)]">
+<div class="layout-container flex h-full grow flex-col">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-[var(--md-sys-color-outline)] px-6 md:px-10 py-4 bg-white shadow-sm">
+<div class="flex items-center gap-3">
+<svg class="h-8 w-8 text-[var(--md-sys-color-primary)]" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M3 4H9V10H3V4ZM3 12H9V18H3V12ZM11 4H17V10H11V4ZM11 12H17V18H11V12ZM19 4H21V10H19V4ZM19 12H21V18H19V12ZM3 20H21V22H3V20Z"></path>
+</svg>
+<h1 class="text-xl font-semibold tracking-tight text-[var(--md-sys-color-primary)]">EasyStock Pro</h1>
+</div>
+<div class="flex items-center gap-2 md:gap-4">
+<button aria-label="Help" class="flex items-center justify-center rounded-full p-2 text-[var(--md-sys-color-on-surface-variant)] hover:bg-[var(--md-sys-color-surface-variant)] focus:outline-none focus:ring-2 focus:ring-[var(--md-sys-color-primary)]">
+<span class="material-icons">help_outline</span>
+</button>
+<div aria-label="User Avatar" class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border border-[var(--md-sys-color-outline)]" role="img" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDmMvgHsfOm3m5ygNLX2o4GFKANFP9X7VdKCTGZyxmaCZgP6eEFIydK_iZCE5f1QUG9xu0K7DMlIdyZbRDw4HG9b02quaoH2DOsGIg0ia06ZjjMpXHyekq0FfklZsdvw1RGnSFEbXIjuv4MufwkjAt5eWHZJMOvHnMQIofHtpzNkSbYiOvL7MTOCvHMJ-GtsGSPkKodKr79ca1q1X3KsP_yoUpsnqWcKsx6xW-eikullWjSKJ9l6tkdYIj20DaSOla_WlIB997E9VPH");'></div>
+<button aria-label="Language Toggle" class="flex items-center justify-center rounded-full p-2 text-[var(--md-sys-color-on-surface-variant)] hover:bg-[var(--md-sys-color-surface-variant)] focus:outline-none focus:ring-2 focus:ring-[var(--md-sys-color-primary)]" id="languageToggle">
+<span class="material-icons">language</span>
+</button>
+</div>
+</header>
+<main class="flex flex-1 flex-col items-center justify-center p-4 md:p-10">
+<div class="w-full max-w-md rounded-xl bg-white p-6 md:p-8 shadow-xl border border-[var(--md-sys-color-outline)]/30">
+<div class="flex flex-col items-center text-center">
+<span class="material-icons text-6xl text-[var(--md-sys-color-primary)] mb-4">logout</span>
+<h2 class="text-2xl md:text-3xl font-medium text-[var(--md-sys-color-on-surface)] mb-2">
+                You are about to log out
+              </h2>
+<p class="text-base text-[var(--md-sys-color-on-surface-variant)] mb-8">
+                Are you sure you want to end your session?
+              </p>
+<div class="flex w-full flex-col sm:flex-row gap-3">
+<button class="flex flex-1 items-center justify-center rounded-lg h-12 px-6 bg-[var(--md-sys-color-surface-variant)] text-[var(--md-sys-color-on-surface-variant)] text-base font-medium hover:bg-[var(--md-sys-color-outline)]/20 focus:outline-none focus:ring-2 focus:ring-[var(--md-sys-color-primary)] transition-colors duration-150" id="cancelBtn">
+                  Cancel
+                </button>
+<button class="flex flex-1 items-center justify-center rounded-lg h-12 px-6 bg-[var(--md-sys-color-primary)] text-[var(--md-sys-color-on-primary)] text-base font-medium hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-[var(--md-sys-color-primary)] focus:ring-offset-2 transition-colors duration-150" id="logoutBtn">
+                  Log Out
+                </button>
+</div>
+</div>
+</div>
+<p class="mt-8 text-sm text-[var(--md-sys-color-on-surface-variant)]">
+            EasyStock Pro © <span id="currentYear"></span>. All rights reserved.
+          </p>
+</main>
+</div>
+</div>
+<script>
+      // Set current year
+      document.getElementById("currentYear").textContent = new Date().getFullYear();
+      
+      // Handle logout confirmation
+      document.getElementById("logoutBtn").addEventListener('click', function() {
+        // Show loading state
+        this.innerHTML = '<span class="material-icons animate-spin mr-2">refresh</span>Logging out...';
+        this.disabled = true;
+        
+        // Simulate logout process
+        setTimeout(() => {
+          // Clear any stored session data
+          localStorage.removeItem('userSession');
+          sessionStorage.clear();
+          
+          // Show success message
+          alert('You have been successfully logged out. Thank you for using EasyStock Pro!');
+          
+          // Redirect to login page
+          window.location.href = 'login.html';
+        }, 1500);
+      });
+      
+      // Handle cancel button
+      document.getElementById("cancelBtn").addEventListener('click', function() {
+        // Go back to previous page or dashboard
+        if (document.referrer && document.referrer.includes(window.location.hostname)) {
+          window.history.back();
+        } else {
+          window.location.href = 'dashboard.html';
+        }
+      });
+      
+      // Language toggle functionality
+      document.getElementById("languageToggle").addEventListener('click', function() {
+        const currentDir = document.documentElement.dir || 'ltr';
+        const isRTL = currentDir === 'rtl';
+        
+        if (isRTL) {
+          document.documentElement.dir = 'ltr';
+          document.body.dir = 'ltr';
+          // Update text content for LTR
+          document.querySelector('h2').textContent = 'You are about to log out';
+          document.querySelector('p').textContent = 'Are you sure you want to end your session?';
+          document.getElementById('cancelBtn').textContent = 'Cancel';
+          document.getElementById('logoutBtn').textContent = 'Log Out';
+        } else {
+          document.documentElement.dir = 'rtl';
+          document.body.dir = 'rtl';
+          // Update text content for RTL (Arabic)
+          document.querySelector('h2').textContent = 'أنت على وشك تسجيل الخروج';
+          document.querySelector('p').textContent = 'هل أنت متأكد من أنك تريد إنهاء جلستك؟';
+          document.getElementById('cancelBtn').textContent = 'إلغاء';
+          document.getElementById('logoutBtn').textContent = 'تسجيل الخروج';
+        }
+      });
+      
+      // Keyboard shortcuts
+      document.addEventListener('keydown', function(e) {
+        // ESC key to cancel
+        if (e.key === 'Escape') {
+          document.getElementById('cancelBtn').click();
+        }
+        // Enter key to confirm logout
+        if (e.key === 'Enter') {
+          document.getElementById('logoutBtn').click();
+        }
+      });
+    </script>
+
+</body>
+</html>
